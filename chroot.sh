@@ -60,5 +60,6 @@ mv -v /asound.conf /etc/asound.conf
 chown root:root /etc/asound.conf
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
+mv config.h /home/min/
 rm chroot.sh
 su min -c ./user.sh

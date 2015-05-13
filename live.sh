@@ -45,4 +45,5 @@ echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v chroot.sh /mnt
 cp -v asound.conf /mnt
 cp -v user.sh /mnt
+cp -v config.h /mnt
 arch-chroot /mnt ./chroot.sh
