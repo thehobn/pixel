@@ -30,8 +30,6 @@ printf 'xset s off &\nxset -dpms &\nxsetroot -name pixel &\nexec dwm' > ~/.xinit
 echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
 printf '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx && setxkbmap -option caps:none' > ~/.zprofile
 
-# fonts (inconsolata)
-
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
 printf 'cd /home/min/.builds/linux-samus-arch-0.2.2 && ALSA_CONFIG_UCM=ucm/ alsaucm -c bdw-rt5677 set _verb HiFi\nsudo xrandr --newmode "1280x850" 88.75 1280 1352 1480 1680 850 853 863 883 -hsync +vsync\nsudo xrandr --addmode eDP1 1280x850' > /home/min/finish.sh
 sudo rm /user.sh
