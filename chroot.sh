@@ -49,7 +49,7 @@ mv -v /vimrc /etc/vimrc
 chown root:root /etc/vimrc
 
 echo "$(tput setaf 6 & tput smso)Setting up sudo . . .$(tput sgr0)"
-echo 'wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 echo "$(tput setaf 6 & tput smso)Editing logind . . .$(tput sgr0)"
 mv -v /logind.conf /etc/systemd/logind.conf
