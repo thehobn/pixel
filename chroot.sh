@@ -30,7 +30,7 @@ printf pixel > /etc/hostname
 useradd -m -g users -G wheel min
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
-printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin min --noclear %I 38400 linux\nType=simple' > /etc/systemd/system/getty@tty1.service.d
+printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin min --noclear %%I 38400 linux\nType=simple' > /etc/systemd/system/getty@tty1.service.d
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /bin/zsh root
