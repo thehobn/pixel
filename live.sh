@@ -29,7 +29,8 @@ mkdir -v /mnt/boot
 mount -v $KEY /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
-mv -v keyfile /mnt/boot
+cp -v keyfile /mnt/boot
+shred -v keyfile -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Running pacstrap . . .$(tput sgr0)"
 pacstrap /mnt base
