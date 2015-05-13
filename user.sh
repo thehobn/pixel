@@ -20,6 +20,7 @@ yaourt -Syua st-git-zsh tor-browser-en ttf-inconsolata-g --noconfirm
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -v -r /var/abs/community/dwm ~/.builds/dwm
+sudo chown min:users ~/config.h
 mv ~/config.h ~/.builds/dwm/config.h
 cd ~/.builds/dwm && makepkg -si --noconfirm
 
