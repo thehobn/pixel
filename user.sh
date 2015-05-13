@@ -35,5 +35,6 @@ printf '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx' > ~/.zprofile
 
 # pacman mirrors
 
-# cleanup
+echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
+printf 'cd /home/min/.builds/linux-samus-arch-0.2.2 && ALSA_CONFIG_UCM=ucm/ alsaucm -c bdw-rt5677 set _verb HiFi' > /home/min/finish.sh
 sudo rm /user.sh
