@@ -1,6 +1,6 @@
 #!/bin/bash
-echo SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
-echo KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+SSD='/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
+KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 parted $SSD mktable gpt
 parted $KEY mktable gpt

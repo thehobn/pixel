@@ -28,3 +28,5 @@ echo 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMat
 # fonts (inconsolata)
 
 # xkb the locks out
+
+# pacman mirrors

@@ -1,6 +1,6 @@
 #!/bin/bash
-echo SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
-echo KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
+KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo base-devel wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh zsh-completions gvim vim slock surf mpd vlc libreoffice gimp abs dmenu syslinux
 
