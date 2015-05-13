@@ -37,12 +37,6 @@ pacstrap /mnt base
 echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
-echo "$(tput setaf 6 & tput smso)Building kernel . . .$(tput sgr0)"
-echo 'MODULES="btrfs nls_cp437 i915"\nHOOKS="base udev autodetect modconf block encrypt lvm2 filesystems keyboard fsck consolefont"' > /etc/mkinitcpio.conf
-mkinitcpio -p linux
-
-
-
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv chroot.sh /mnt
 mv user.sh /mnt
