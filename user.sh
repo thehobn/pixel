@@ -1,7 +1,12 @@
 #!/bin/bash
 
-echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Applying tsowell patch . . .$(tput sgr0)"
 mkdir -v ~/.builds
+cd ~/.builds && curl -LO https://github.com/tsowell/linux-samus/releases/download/v0.2.2/linux-samus-arch-0.2.2.tar
+tar xvf linux-samus-arch-0.2.2.tar
+cd ~/.builds/linux-samus-arch-0.2.2 && sudo pacman -U *.pkg.tar.xz
+
+echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
 cd ~/.builds/package-query && makepkg -si --noconfirm

@@ -47,7 +47,7 @@ echo "$(tput setaf 6 & tput smso)Editing logind . . .$(tput sgr0)"
 printf '[Login]\nNAutoVTs=10\nHandlePowerKey=suspend\nHandleSuspendKey=ignore\nHandleHibernateKey=ignore\nHandleLidSwitch=ignore\nHandleLidSwitchDocked=ignore' > /etc/systemd/logind.conf
 
 echo "$(tput setaf 6 & tput smso)Editing synaptics . . .$(tput sgr0)"
-printf 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\t\tOption "TapButton1" "1"\n\t\tOption "TapButton2" "2"\n\t\tOption "TapButton3" "3"\n\t\tOption "VertTwoFingerScroll" "on"\n\t\tOption "HorizTwoFingerScroll" "on"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
+printf 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\t\tMatchDevicePath "/dev/input/event*"\n\t\tOption "TapButton1" "1"\n\t\tOption "TapButton2" "2"\n\t\tOption "TapButton3" "3"\n\t\tOption "VertTwoFingerScroll" "on"\n\t\tOption "HorizTwoFingerScroll" "on"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 rm chroot.sh
