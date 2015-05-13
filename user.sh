@@ -1,13 +1,16 @@
 #!/bin/bash
 
+echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 mkdir ~/.builds
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt
 cd ~/.builds/package-query && makepkg -si
 cd ~/.builds/yaourt && makepkg -si
 
+echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
 yaourt -Syyu st-git-zsh tor-browser-en
 
+echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -r /var/abs/community/dwm ~/.builds/dwm
 cd ~/.builds && makepkg -i
@@ -15,15 +18,11 @@ cd ~/.builds && makepkg -i
 # 
 # makepkg -efi --skipinteg #for recompiling with config.h modifications
 
-echo 'xset s off &\nxset -dpms &\nxsetroot -name pixel &\nexec dwm' > ~/.xinitrc
+echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
+printf 'xset s off &\nxset -dpms &\nxsetroot -name pixel &\nexec dwm' > ~/.xinitrc
 
-
-echo '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx' > ~/.zprofile
-
-echo '[Login]\nNAutoVTs=10\nHandlePowerKey=suspend\nHandleSuspendKey=ignore\nHandleHibernateKey=ignore\nHandleLidSwitch=ignore\nHandleLidSwitchDocked=ignore' > /etc/systemd/logind.conf
-
-echo 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\t\tOption "TapButton1" "1"\n\t\tOption "TapButton2" "2"\n\t\tOption "TapButton3" "3"\n\t\tOption "VertTwoFingerScroll" "on"\n\t\tOption "HorizTwoFingerScroll" "on"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
-
+echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
+printf '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx' > ~/.zprofile
 
 # fonts (inconsolata)
 
