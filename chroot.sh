@@ -55,19 +55,8 @@ echo "$(tput setaf 6 & tput smso)Editing synaptics . . .$(tput sgr0)"
 printf 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\t\tMatchDevicePath "/dev/input/event*"\n\t\tOption "TapButton1" "1"\n\t\tOption "TapButton2" "2"\n\t\tOption "TapButton3" "3"\n\t\tOption "VertTwoFingerScroll" "on"\n\t\tOption "HorizTwoFingerScroll" "on"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
 
 echo "$(tput setaf 6 & tput smso)Editing xrandr . . .$(tput sgr0)"
-xrandr --delmode eDP1 2048x1536
-xrandr --delmode eDP1 1920x1440
-xrandr --delmode eDP1 1856x1392
-xrandr --delmode eDP1 1792x1344
-xrandr --delmode eDP1 1600x1200
-xrandr --delmode eDP1 1400x1050
-xrandr --delmode eDP1 1280x1024
-xrandr --delmode eDP1 1280x960
-xrandr --delmode eDP1 1280x850
-xrandr --delmode eDP1 1024x768
-xrandr --delmode eDP1 800x600
-xrandr --delmode eDP1 640x400
 xrandr --newmode "1280x850" 88.75 1280 1352 1480 850 853 863 883 -hsync +vsync
+xrandr --addmode eDP1 1280x850
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 rm chroot.sh
