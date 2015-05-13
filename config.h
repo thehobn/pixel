@@ -46,11 +46,11 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *decnit[]  = { "xbacklight", "-dec", 5, NULL };
-static const char *incnit[]  = { "xbacklight", "-inc", 5, NULL };
-static const char *mutedb[]  = { "amixer", set, Master, 0, NULL };
-static const char *decdb[]  = { "amixer", set, Master, 5-, NULL };
-static const char *incdb[]  = { "amixer", set, Master, 5+, NULL };
+static const char *decnit[] = { "xbacklight", "-dec", "5", NULL };
+static const char *incnit[] = { "xbacklight", "-inc", "5", NULL };
+static const char *mutedb[] = { "amixer", "set", "Master", "0", NULL };
+static const char *decdb[] = { "amixer", "set", "Master", "5-", NULL };
+static const char *incdb[] = { "amixer", "set", "Master", "5+", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -69,11 +69,11 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_F5,	   togglefloating, {0} },
 	{ MODKEY,                       XK_F5,     view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY			XK_F6,	   spawn,	   {.v = decnit } },
-	{ MODKEY			XK_F7,	   spawn,	   {.v = incnit } },
-	{ MODKEY			XK_F8,	   spawn,	   {.v = mutedb } },
-	{ MODKEY			XK_F9,	   spawn,	   {.v = decdb } },
-	{ MODKEY			XK_F10,	   spawn,	   {.v = incdb } },
+	{ MODKEY,			XK_F6,	   spawn,	   {.v = decnit } },
+	{ MODKEY,			XK_F7,	   spawn,	   {.v = incnit } },
+	{ MODKEY,			XK_F8,	   spawn,	   {.v = mutedb } },
+	{ MODKEY,			XK_F9,	   spawn,	   {.v = decdb } },
+	{ MODKEY,			XK_F10,	   spawn,	   {.v = incdb } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

@@ -20,9 +20,8 @@ yaourt -Syua st-git-zsh tor-browser-en ttf-inconsolata-g --noconfirm
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -v -r /var/abs/community/dwm ~/.builds/dwm
+mv ~/config.h ~/.builds/dwm/config.h
 cd ~/.builds/dwm && makepkg -si --noconfirm
-mv ~/config.h ~/.builds/dwm/src/config.h
-cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
 printf 'xset s off &\nxset -dpms &\nxsetroot -name pixel &\nexec dwm' > ~/.xinitrc
