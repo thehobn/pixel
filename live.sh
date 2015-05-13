@@ -31,11 +31,11 @@ mount $KEY /mnt/boot
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 mv keyfile /mnt/boot
 
-echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
-genfstab -U -p /mnt >> /mnt/etc/fstab
-
 echo "$(tput setaf 6 & tput smso)Running pacstrap . . .$(tput sgr0)"
 pacstrap /mnt base
+
+echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
+genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "$(tput setaf 6 & tput smso)Building kernel . . .$(tput sgr0)"
 echo 'MODULES="btrfs nls_cp437 i915"\nHOOKS="base udev autodetect modconf block encrypt lvm2 filesystems keyboard fsck consolefont"' > /etc/mkinitcpio.conf
