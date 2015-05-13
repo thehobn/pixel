@@ -54,10 +54,13 @@ printf '[Login]\nNAutoVTs=10\nHandlePowerKey=suspend\nHandleSuspendKey=ignore\nH
 echo "$(tput setaf 6 & tput smso)Editing synaptics . . .$(tput sgr0)"
 printf 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\t\tMatchDevicePath "/dev/input/event*"\n\t\tOption "TapButton1" "1"\n\t\tOption "TapButton2" "2"\n\t\tOption "TapButton3" "3"\n\t\tOption "VertTwoFingerScroll" "on"\n\t\tOption "HorizTwoFingerScroll" "on"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
 
-echo "$(tput setaf 6 & tput smso)Fixing audio. . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Fixing audio . . .$(tput sgr0)"
 printf 'options snd_soc_rt5677 index=0\noptions snd_hda_intel index=1' > /etc/modprobe.d/alsa-base.conf
 mv -v /asound.conf /etc/asound.conf
 chown root:root /etc/asound.conf
+
+echo "$(tput setaf 6 & tput smso)Disabling keyboard backlight . . .$(tput sgr0)"
+echo 0 > /sys/class/leds/chromeos::kbd_backlight/brightness
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv config.h /home/min/
