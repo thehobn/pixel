@@ -33,7 +33,7 @@ echo "$(tput setaf 6 & tput smso)Enable dhcpcd . . .$(tput sgr0)"
 systemctl enable dhcpcd.service
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
-printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin min --noclear %%I 38400 linux\nType=idle' > /etc/systemd/system/getty@tty1.service.d/override.conf
+printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin min --noclear %%I 38400 linux\nType=idle' | SYSTEMD_EDITOR=tee systemctl edit getty@tty1
 systemctl daemon-reload
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
