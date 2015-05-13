@@ -44,4 +44,5 @@ echo "$(tput setaf 6 & tput smso)Setting up sudo . . .$(tput sgr0)"
 printf 'root ALL=(ALL) ALL\n%%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
+rm chroot.sh
 su min -c ./user.sh

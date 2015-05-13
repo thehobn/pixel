@@ -32,4 +32,4 @@ echo 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMat
 # pacman mirrors
 
 # cleanup
-rm ./user.sh
+rm user.sh
