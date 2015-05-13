@@ -10,12 +10,12 @@ echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
-cryptsetup luksFormat $SSD keyfile --batch-mode
-cryptsetup open --type luks $SSD sys --key-file=keyfile
+cryptsetup -v luksFormat $SSD keyfile --batch-mode
+cryptsetup -v open --type luks $SSD sys --key-file=keyfile
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
-vgcreate sys /dev/mapper/sys
-lvcreate -l +100%FREE sys -n root
+vgcreate -v sys /dev/mapper/sys
+lvcreate -v -l +100%FREE sys -n root
 
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs /dev/mapper/sys-root
@@ -24,12 +24,12 @@ mkfs.btrfs -f $KEY
 btrfs filesystem label $KEY key
 
 echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
-mount /dev/mapper/sys-root /mnt
-mkdir /mnt/boot
-mount $KEY /mnt/boot
+mount -v /dev/mapper/sys-root /mnt
+mkdir -v /mnt/boot
+mount -v $KEY /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
-mv keyfile /mnt/boot
+mv -v keyfile /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Running pacstrap . . .$(tput sgr0)"
 pacstrap /mnt base
