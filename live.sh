@@ -14,7 +14,6 @@ dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SSD keyfile --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=keyfile
-cryptsetup luksAddKey $SSD --key-file=keyfile
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
 vgcreate -v sys /dev/mapper/sys
