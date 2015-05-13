@@ -33,8 +33,8 @@ echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
 printf '[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin min --noclear %%I 38400 linux\nType=idle' > /etc/systemd/system/getty@tty1.service.d
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
-chsh -s /bin/zsh root
-chsh -s /bin/zsh min
+chsh -s /usr/bin/zsh root
+chsh -s /usr/bin/zsh min
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 printf 'export EDITOR=vim' >> /etc/profile
