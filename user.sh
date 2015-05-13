@@ -5,6 +5,8 @@ mkdir -v ~/.builds
 cd ~/.builds && curl -LO https://github.com/tsowell/linux-samus/releases/download/v0.2.2/linux-samus-arch-0.2.2.tar
 tar xvf linux-samus-arch-0.2.2.tar
 cd ~/.builds/linux-samus-arch-0.2.2 && sudo pacman -U *.pkg.tar.xz --noconfirm
+sudo cp -v -r ~/.builds/linux-samus-arch-0.2.2/ucm/bdw-rt5677 /usr/share/alsa/ucm
+sudo mv -v /handler.sh /etc/acpi/handler.sh
 
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz

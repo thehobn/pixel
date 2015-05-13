@@ -45,4 +45,5 @@ cp -v chroot.sh /mnt
 cp -v asound.conf /mnt
 cp -v user.sh /mnt
 cp -v config.h /mnt
+cp -v handler.sh /mnt
 arch-chroot /mnt ./chroot.sh
