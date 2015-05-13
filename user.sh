@@ -23,8 +23,10 @@ echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -v -r /var/abs/community/dwm ~/.builds/dwm
 sudo chown min:users ~/config.h
-mv ~/config.h ~/.builds/dwm/config.h
 cd ~/.builds/dwm && makepkg -si --noconfirm
+mv -v ~/config.h ~/.builds/dwm/config.h
+cp -v ~/.builds/dwm/config.h ~/.builds/dwm/src/config.h
+cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
 sudo mv -v /.xinitrc ~/.xinitrc
