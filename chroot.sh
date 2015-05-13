@@ -1,6 +1,7 @@
 #!/bin/bash
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part1
 
 echo "$(tput setaf 6 & tput smso)Building kernel . . .$(tput sgr0)"
 printf 'MODULES="btrfs nls_cp437 i915"\nHOOKS="base udev autodetect modconf block encrypt lvm2 filesystems keyboard fsck consolefont"' > /etc/mkinitcpio.conf
@@ -14,7 +15,7 @@ cp -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux
 extlinux --install /boot/syslinux
 sgdisk $KEY --attributes=1:set:2
 dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/bios/gptmbr.bin of=$KEY
-printf 'PROMPT 0\nTIMEOUT 0\nDEFAULT arch\n\nLABEL arch\n\tMENU LABEL Arch Linux\n\tLINUX ../vmlinuz.linux\n\tAPPEND cryptkey=$KEY:btrfs:/keyfile cryptdevice=$SSD:sys root=/dev/mapper/sys-root rw rootwait ignore_loglevel debug debug_locks_verbose=1 sched_debug initcall_debug mminit_loglevel=4 udev.log_priority=8 loglevel=8 earlyprintk=vga,keep log_buf_len=10M print_fatal_signals=1 apm.debug=Y i8042.debug=Y drm.debug=1 scsi_logging_level=1 usbserial.debug=Y option.debug=Y pl2303.debug=Y firewire_ohci.debug=1 hid.debug=1 pci_hotplug.debug=Y pci_hotplug.debug_acpi=Y shpchp.shpchp_debug=Y apic=debug show_lapic=all hpet=verbose lmb=debug pause_on_oops=5 panic=10 sysrq_always_enabled\n\tINITRD ../initramfs-linux.img' > /boot/syslinux/syslinux.cfg
+printf 'PROMPT 0\nTIMEOUT 0\nDEFAULT arch\n\nLABEL arch\n\tMENU LABEL Arch Linux\n\tLINUX ../vmlinuz.linux\n\tAPPEND cryptkey=$BOOT:btrfs:/keyfile cryptdevice=$SSD:sys root=/dev/mapper/sys-root rw rootwait ignore_loglevel debug debug_locks_verbose=1 sched_debug initcall_debug mminit_loglevel=4 udev.log_priority=8 loglevel=8 earlyprintk=vga,keep log_buf_len=10M print_fatal_signals=1 apm.debug=Y i8042.debug=Y drm.debug=1 scsi_logging_level=1 usbserial.debug=Y option.debug=Y pl2303.debug=Y firewire_ohci.debug=1 hid.debug=1 pci_hotplug.debug=Y pci_hotplug.debug_acpi=Y shpchp.shpchp_debug=Y apic=debug show_lapic=all hpet=verbose lmb=debug pause_on_oops=5 panic=10 sysrq_always_enabled\n\tINITRD ../initramfs-linux.img' > /boot/syslinux/syslinux.cfg
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 printf en_US.UTF-8 UTF-8 >> /etc/locale.gen
