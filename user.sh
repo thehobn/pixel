@@ -13,10 +13,10 @@ yaourt -Syua st-git-zsh tor-browser-en --noconfirm
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -v -r /var/abs/community/dwm ~/.builds/dwm
-cd ~/.builds/dwm && makepkg -si
+cd ~/.builds/dwm && makepkg -si --noconfirm
 # config.h
 # 
-# makepkg -efi --skipinteg #for recompiling with config.h modifications
+# makepkg -efi --skipinteg --noconfirm #for recompiling with config.h modifications
 
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
 printf 'xset s off &\nxset -dpms &\nxsetroot -name pixel &\nexec dwm' > ~/.xinitrc

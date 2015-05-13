@@ -11,7 +11,7 @@ echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo base-devel wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh zsh-completions gvim vim slock surf mpd vlc libreoffice gimp abs dmenu syslinux --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
-cp -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux
+cp -v -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux
 extlinux --install /boot/syslinux
 sgdisk $KEY --attributes=1:set:2
 dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/bios/gptmbr.bin of=$KEY
