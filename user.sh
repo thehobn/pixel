@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
-mkdir ~/.builds
+mkdir -v ~/.builds
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
 cd ~/.builds/package-query && makepkg -si --noconfirm
@@ -12,8 +12,8 @@ yaourt -Syua st-git-zsh tor-browser-en --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
-cp -r /var/abs/community/dwm ~/.builds/dwm
-cd ~/.builds && makepkg -i
+cp -v -r /var/abs/community/dwm ~/.builds/dwm
+cd ~/.builds/dwm && makepkg -si
 # config.h
 # 
 # makepkg -efi --skipinteg #for recompiling with config.h modifications
