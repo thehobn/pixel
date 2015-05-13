@@ -43,8 +43,5 @@ printf 'set ttyscroll=0\nset guifont=inconsolata\nsyntax enable\nset nu' > /etc/
 echo "$(tput setaf 6 & tput smso)Setting up sudo . . .$(tput sgr0)"
 printf 'root ALL=(ALL) ALL\n%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
-
-
-echo "$(tput setaf 6 & tput smso) . . .$(tput sgr0)"
-mv /user.sh /home/min
+echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 su min -c ./user.sh

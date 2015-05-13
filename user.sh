@@ -30,3 +30,6 @@ echo 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMat
 # xkb the locks out
 
 # pacman mirrors
+
+# cleanup
+rm ./user.sh

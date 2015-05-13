@@ -38,6 +38,5 @@ echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-mv chroot.sh /mnt
-mv user.sh /mnt
+cp -v user.sh /mnt
 arch-chroot /mnt ./chroot.sh
