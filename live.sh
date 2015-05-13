@@ -10,7 +10,7 @@ echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
-cryptsetup luksFormat $SSD keyfile
+cryptsetup luksFormat $SSD keyfile --batch-mode
 cryptsetup open --type luks $SSD sys --key-file=keyfile
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
