@@ -5,7 +5,7 @@ KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 parted $SSD mktable gpt
 parted $KEY mktable gpt
 
-dd bs=1024 count=8192 if=/dev/urandom of=keyfile iflag=fullblock #lol
+dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 cryptsetup luksFormat $SSD keyfile
 cryptsetup open --type luks $SSD sys --key-file=keyfile
 
