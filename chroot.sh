@@ -35,9 +35,8 @@ echo "$(tput setaf 6 & tput smso)Enable dhcpcd . . .$(tput sgr0)"
 systemctl enable dhcpcd.service
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
-cat /getty | SYSTEMD_EDITOR=tee systemctl edit getty@tty1
+mv -v /getty@tty1.service /etc/systemd/system/getty.target.wants
 systemctl daemon-reload
-rm -v -f /getty
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root

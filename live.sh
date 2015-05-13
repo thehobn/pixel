@@ -48,7 +48,7 @@ cp -v config.h /mnt
 cp -v handler.sh /mnt
 cp -v 50-synaptics.conf /mnt
 cp -v alsa-base.conf /mnt
-cp -v getty /mnt
+cp -v getty@tty1.service /mnt
 cp -v vimrc /mnt
 cp -v .xinitrc /mnt
 cp -v logind.conf /mnt

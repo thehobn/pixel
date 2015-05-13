@@ -1,4 +1,0 @@
-[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin min --noclear %I 38400 linux
-Type=simple
