@@ -6,7 +6,7 @@ BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part1
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
 parted -s $SSD mktable gpt
 parted -s $KEY mktable gpt 
-parted -s $KEY -- mkpart boot btrfs 2048s -1s
+parted -s $KEY -- mkpart boot btrfs 2048s -34s
 
 echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
