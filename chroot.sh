@@ -41,7 +41,7 @@ printf 'export EDITOR=vim' >> /etc/profile
 printf 'set ttyscroll=0\nset guifont=inconsolata\nsyntax enable\nset nu' > /etc/vimrc
 
 echo "$(tput setaf 6 & tput smso)Setting up sudo . . .$(tput sgr0)"
-printf 'root ALL=(ALL) ALL\n%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
+printf 'root ALL=(ALL) ALL\n%%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 su min -c ./user.sh
