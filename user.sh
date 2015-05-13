@@ -4,11 +4,11 @@ echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 mkdir ~/.builds
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
-cd ~/.builds/package-query && makepkg -si
-cd ~/.builds/yaourt && makepkg -si
+cd ~/.builds/package-query && makepkg -si --noconfirm
+cd ~/.builds/yaourt && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
-yaourt -Syyu st-git-zsh tor-browser-en
+yaourt -Syua st-git-zsh tor-browser-en --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
