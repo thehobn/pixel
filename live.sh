@@ -46,4 +46,12 @@ cp -v asound.conf /mnt
 cp -v user.sh /mnt
 cp -v config.h /mnt
 cp -v handler.sh /mnt
+cp -v 50-synaptics.conf /mnt
+cp -v alsa-base.conf /mnt
+cp -v getty /mnt
+cp -v vimrc /mnt
+cp -v .xinitrc /mnt
+cp -v logind.conf /mnt
+cp -v mkinitcpio.conf /mnt
+cp -v syslinux.cfg /mnt
 arch-chroot /mnt ./chroot.sh
