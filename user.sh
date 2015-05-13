@@ -31,4 +31,4 @@ printf '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx' > ~/.zprofile
 # pacman mirrors
 
 # cleanup
-rm user.sh
+sudo rm /user.sh
