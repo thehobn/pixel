@@ -2,8 +2,8 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-parted $SSD mktable gpt
-parted $KEY mktable gpt
+parted -s $SSD mktable gpt
+parted -s $KEY mktable gpt
 
 dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 cryptsetup luksFormat $SSD keyfile
@@ -14,15 +14,16 @@ lvcreate -l +100%FREE sys -n root
 
 mkfs.btrfs /dev/mapper/sys-root
 btrfs filesystem label /dev/mapper/sys-root sys
-mkfs.btrfs $KEY
+mkfs.btrfs -f $KEY
 btrfs filesystem label $KEY key
 
 mount /dev/mapper/sys-root /mnt
-pacstrap /mnt base
-
+mkdir /mnt/boot
 mount $KEY /mnt/boot
-cp keyfile /mnt/boot
 
+
+cp keyfile /mnt/boot
+pacstrap /mnt base
 echo 'MODULES="btrfs nls_cp437 i915"\nHOOKS="base udev autodetect modconf block encrypt lvm2 filesystems keyboard fsck consolefont"' > /etc/mkinitcpio.conf
 mkinitcpio -p linux
 genfstab -U -p /mnt >> /mnt/etc/fstab
