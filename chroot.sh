@@ -21,7 +21,7 @@ printf en_US.UTF-8 UTF-8 >> /etc/locale.gen
 locale-gen
 printf LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
-ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
+ln -v -s /usr/share/zoneinfo/US/Pacific /etc/localtime
 hwclock --systohc --utc
 
 echo "$(tput setaf 6 & tput smso)Setting hostname and adding user . . .$(tput sgr0)"

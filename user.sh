@@ -2,8 +2,8 @@
 
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 mkdir ~/.builds
-cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query
-cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt
+cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
+cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
 cd ~/.builds/package-query && makepkg -si
 cd ~/.builds/yaourt && makepkg -si
 
