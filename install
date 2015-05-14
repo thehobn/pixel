@@ -42,4 +42,4 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v payload/* /mnt
-arch-chroot /mnt ./chroot.sh
+arch-chroot /mnt ./chroot
