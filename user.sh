@@ -36,5 +36,5 @@ echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
 echo '[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx && setxkbmap -option caps:none' > ~/.zprofile
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
-echo "cd /home/min/.builds/linux-samus-arch-0.2.2 && ALSA_CONFIG_UCM=ucm/ alsaucm -c bdw-rt5677 set _verb HiFi && su -c 'echo 0 > /sys/class/leds/chromeos::kbd_backlight/brightness'" > /home/min/finish.sh
+echo 'cd /home/min/.builds/linux-samus-arch-0.2.2 && ALSA_CONFIG_UCM=ucm/ alsaucm -c bdw-rt5677 set _verb HiFi && sudo xrandr --newmode "1280x850" 88.75 1280 1352 1480 1680 850 853 863 883 -hsync +vsync && sudo xrandr --addmode eDP1 1280x850 && su -c "echo 0 > /sys/class/leds/chromeos::kbd_backlight/brightness"' > /home/min/finish.sh
 sudo rm /user.sh
