@@ -7,6 +7,7 @@ tar xvf linux-samus-arch-0.2.2.tar
 cd ~/.builds/linux-samus-arch-0.2.2 && sudo pacman -U *.pkg.tar.xz --noconfirm
 sudo cp -v -r ~/.builds/linux-samus-arch-0.2.2/ucm/bdw-rt5677 /usr/share/alsa/ucm
 sudo chown -R root:root /usr/share/alsa/ucm/bdw-rt5677
+mkdir /etc/acpi
 sudo mv -v /handler.sh /etc/acpi/handler.sh
 sudo chown root:root /etc/acpi/handler.sh
 
