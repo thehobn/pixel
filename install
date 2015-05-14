@@ -41,20 +41,5 @@ echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-cp -v chroot.sh /mnt
-cp -v asound.conf /mnt
-cp -v user.sh /mnt
-cp -v config.h /mnt
-cp -v handler.sh /mnt
-cp -v 50-synaptics.conf /mnt
-cp -v alsa-base.conf /mnt
-cp -v getty@tty1.service /mnt
-cp -v vimrc /mnt
-cp -v .xinitrc /mnt
-cp -v logind.conf /mnt
-cp -v mkinitcpio.conf /mnt
-cp -v syslinux.cfg /mnt
-cp -v wpa_supplicant-wlp1s0.conf /mnt
-cp -v 20-intel.conf /mnt
-cp -v su /mnt
+cp -v payload/* /mnt
 arch-chroot /mnt ./chroot.sh
