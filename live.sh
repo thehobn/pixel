@@ -54,4 +54,6 @@ cp -v .xinitrc /mnt
 cp -v logind.conf /mnt
 cp -v mkinitcpio.conf /mnt
 cp -v syslinux.cfg /mnt
+cp -v wpa_supplicant-wlp1s0.conf /mnt
+cp -v 20-intel.conf /mnt
 arch-chroot /mnt ./chroot.sh

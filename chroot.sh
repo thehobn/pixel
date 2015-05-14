@@ -56,13 +56,22 @@ chown root:root /etc/systemd/logind.conf
 
 echo "$(tput setaf 6 & tput smso)Editing synaptics . . .$(tput sgr0)"
 mv -v /50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
-chown root:root
+chown root:root /etc/X11/xorg.conf.d/50-synaptics.conf
+
+echo "$(tput setaf 6 & tput smso)Fixing Intel acceleration . . .$(tput sgr0)"
+mv -v /20-intel.conf /etc/X11/xorg.conf.d/20-intel.conf
+chown root:root /etc/X11/xorg.conf.d/20-intel.conf
 
 echo "$(tput setaf 6 & tput smso)Fixing audio . . .$(tput sgr0)"
 mv -v /alsa-base.conf /etc/modprobe.d/alsa-base.conf
 chown root:root /etc/modprobe.d/alsa-base.conf
 mv -v /asound.conf /etc/asound.conf
 chown root:root /etc/asound.conf
+
+echo "$(tput setaf 6 & tput smso)Setting up WiFi . . .$(tput sgr0)"
+mv -v /wpa_supplicant-wlp1s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
+chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
+systemctl enable wpa_supplicant@wlp1s0.service
 
 echo "$(tput setaf 6 & tput smso)Disabling keyboard backlight . . .$(tput sgr0)"
 echo 0 > /sys/class/leds/chromeos::kbd_backlight/brightness
