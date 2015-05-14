@@ -47,8 +47,10 @@ echo'export EDITOR=vim' >> /etc/profile
 mv -v /vimrc /etc/vimrc
 chown root:root /etc/vimrc
 
-echo "$(tput setaf 6 & tput smso)Setting up sudo . . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Setting up sudo and su . . .$(tput sgr0)"
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+mv -v /su /etc/pam.d/su
+chown root:root /etc/pam.d/su
 
 echo "$(tput setaf 6 & tput smso)Editing logind . . .$(tput sgr0)"
 mv -v /logind.conf /etc/systemd/logind.conf
@@ -72,9 +74,6 @@ echo "$(tput setaf 6 & tput smso)Setting up WiFi . . .$(tput sgr0)"
 mv -v /wpa_supplicant-wlp1s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
 chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
 systemctl enable wpa_supplicant@wlp1s0.service
-
-echo "$(tput setaf 6 & tput smso)Disabling keyboard backlight . . .$(tput sgr0)"
-echo 0 > /sys/class/leds/chromeos::kbd_backlight/brightness
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv config.h /home/min/
