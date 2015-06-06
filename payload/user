@@ -18,7 +18,7 @@ cd ~/.builds/package-query && makepkg -si --noconfirm
 cd ~/.builds/yaourt && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
-yaourt -Syua st-git-zsh tor-browser-en ttf-inconsolata-g --noconfirm
+yaourt -Syua st-git-zsh tor-browser-en ttf-inconsolata-g xkeyboard-config-chromebook --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
