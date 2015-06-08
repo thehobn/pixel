@@ -64,6 +64,9 @@ echo "$(tput setaf 6 & tput smso)Fixing Intel acceleration . . .$(tput sgr0)"
 mv -v /20-intel.conf /etc/X11/xorg.conf.d/20-intel.conf
 chown root:root /etc/X11/xorg.conf.d/20-intel.conf
 
+echo "$(tput setaf 6 & tput smso)Setting keyboard variant . . .$(tput sgr0)"
+mv -v /10-keyboard.conf /etc/X11/xorg.conf.d/10-keyboard.conf
+
 echo "$(tput setaf 6 & tput smso)Fixing audio . . .$(tput sgr0)"
 mv -v /alsa-base.conf /etc/modprobe.d/alsa-base.conf
 chown root:root /etc/modprobe.d/alsa-base.conf
