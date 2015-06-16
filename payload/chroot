@@ -3,6 +3,10 @@ SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part1
 
+echo "$(tput setaf 6 & tput smso)Creating fstab . . .$(tput sgr0)"
+mv -v /fstab /etc/fstab
+chown root:root /etc/fstab
+
 echo "$(tput setaf 6 & tput smso)Building kernel . . .$(tput sgr0)"
 mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
 chown root:root /etc/mkinitcpio.conf

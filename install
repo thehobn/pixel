@@ -35,9 +35,6 @@ shred -v keyfile -n 8 -z
 echo "$(tput setaf 6 & tput smso)Running pacstrap . . .$(tput sgr0)"
 pacstrap /mnt base
 
-echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
-genfstab -U -p /mnt >> /mnt/etc/fstab
-
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt
 arch-chroot /mnt ./chroot
