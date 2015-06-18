@@ -1,1 +1,1 @@
-[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx && setxkbmap -option caps:none
+[[ -z $DISPLAY && $XDG_VTNR -le 10 ]] && exec startx >/dev/null 2>&1 & setxkbmap -option caps:none
