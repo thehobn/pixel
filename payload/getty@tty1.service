@@ -24,7 +24,7 @@ ConditionPathExists=/dev/tty0
 
 [Service]
 # the VT is cleared by TTYVTDisallocate
-ExecStart=-/sbin/agetty --autologin min -i -n --noclear %I 38400 linux
+ExecStart=-/sbin/agetty --autologin min --noissue --skip-login --noclear %I 38400 linux
 Type=simple
 Restart=always
 RestartSec=0
