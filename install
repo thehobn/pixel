@@ -3,22 +3,10 @@ SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part1
 
-YEAR=2015
-MONTH=06
-MD5=1fe5c63ca870ac68dba08d14919e61d6
-SHA1=08e27a8d9d20171946f9ab5f2057aa021c3d37d3
-
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$YEAR.$MONTH.01/archlinux-$YEAR.$MONTH.01-dual.iso --output-document=live.iso
-
-if [ ($(md5sum live.iso)) == $MD5 -a ($(sha1sum live.iso)) == SHA1 ]
-	then
-		mv -v live.iso /mnt/boot
-	else
-		echo "$(tput setaf 1 & tput smso)ISO did not match checksums!$(tput sgr0)"
-		rm live.iso
-fi
+wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=live.iso
+mv -v live.iso /mnt/boot
 ) &
 
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
