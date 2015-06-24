@@ -1,1 +1,2 @@
-exec startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1  & setxkbmap -option caps:none
+exec startx -- -keeptty -nolisten tcp vt$XDG_VTNR > ~/dev/null 2>&1
+# & setxkbmap -option caps:none
