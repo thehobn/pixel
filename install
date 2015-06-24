@@ -12,7 +12,7 @@ SHA1=08e27a8d9d20171946f9ab5f2057aa021c3d37d3
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
 wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$YEAR.$MONTH.01/archlinux-$YEAR.$MONTH.01-dual.iso --output-document=live.iso
 
-if [($(md5sum live.iso == $ISO_MD5)) -a ($(sha1sum live.iso == $ISO_SHA1))
+if [ ($(md5sum live.iso)) == $MD5 -a ($(sha1sum live.iso)) == SHA1 ]
 	then
 		mv -v live.iso /mnt/boot
 	else
