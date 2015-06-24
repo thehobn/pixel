@@ -5,8 +5,8 @@ BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part1
 
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=live.iso
-mv -v live.iso /mnt/boot
+wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso
+mv -v /tmp/live.iso /mnt/boot
 ) &
 
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
