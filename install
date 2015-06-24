@@ -15,7 +15,7 @@ parted -s $KEY mktable gpt
 parted -s $KEY -- mkpart boot btrfs 2048s -34s
 
 echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
-dd bs=1024 count=8 if=/dev/random of=keyfile iflag=fullblock
+dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SSD keyfile --batch-mode
