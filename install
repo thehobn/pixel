@@ -11,11 +11,11 @@ mv -v live.iso /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
 parted -s $SSD mktable gpt
-parted -s $KEY mktable gpt 
-parted -s $KEY -- mkpart boot btrfs 2048s -34s
+# parted -s $KEY mktable gpt 
+# parted -s $KEY -- mkpart boot btrfs 2048s -34s
 
 echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
-dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
+dd bs=1024 count=8 if=/dev/random of=keyfile iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SSD keyfile --batch-mode
@@ -27,12 +27,12 @@ lvcreate -v -l +100%FREE sys -n root
 
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root /dev/mapper/sys-root
-mkfs.btrfs -L key -f $BOOT
+mkfs.btrfs -L key -f $KEY
 
 echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt
 mkdir -v /mnt/boot
-mount -v $BOOT /mnt/boot
+mount -v $KEY /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v keyfile /mnt/boot
