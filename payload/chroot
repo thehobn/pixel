@@ -16,9 +16,6 @@ mkinitcpio -p linux
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo base-devel wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions gvim vim slock surf mpd vlc libreoffice gimp abs dmenu syslinux gnupg xsel go --noconfirm
 
-echo "$(tput setaf 6 & tput smso)Starting download for live ISO . . .$(tput sgr0)"
-transmission-cli "magnet:?xt=urn:btih:331c7fac2e13c251d77521d2dc61976b6fc4a033&dn=archlinux-2015.06.01-dual.iso&tr=udp://tracker.archlinux.org:6969&tr=http://tracker.archlinux.org:6969/announce" --download-dir=/boot && mv /boot/archlinux-2015.06.01-dual.iso /boot/live.iso
-
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
 cp -v -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux
 extlinux --install /boot/syslinux
