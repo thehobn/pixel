@@ -1,3 +1,4 @@
+set backspace=indent,eol,start
 set ttyscroll=0
 set guifont=inconsolata
 syntax enable
