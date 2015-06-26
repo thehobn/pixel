@@ -39,20 +39,20 @@ cp -v keyfile /mnt/boot
 shred -v keyfile -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacstrap /mnt base \
-syslinux coreutils base-devel \
-alsa-utils acpi ntp openssh \
-wget rsync mlocate \
-dialog wpa_supplicant wireless_tools \
-xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
-xf86-input-synaptics xf86-video-intel mesa 
-git abs go \
-unzip unrar p7zip \
-gptfdisk util-linux parted \
-zsh grml-zsh-config zsh-completions \
-vim gvim vlc gimp libreoffice \
-dmenu slock surf \
-mpd gnupg xsel
+pacstrap /mnt base
+#syslinux coreutils base-devel \
+#alsa-utils acpi ntp openssh \
+#wget rsync mlocate \
+#dialog wpa_supplicant wireless_tools \
+#xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
+#xf86-input-synaptics xf86-video-intel mesa 
+#git abs go \
+#unzip unrar p7zip \
+#gptfdisk util-linux parted \
+#zsh grml-zsh-config zsh-completions \
+#vim gvim vlc gimp libreoffice \
+#dmenu slock surf \
+#mpd gnupg xsel
 
 
 echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
