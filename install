@@ -38,28 +38,16 @@ echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v keyfile /mnt/boot
 shred -v keyfile -n 8 -z
 
-echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacstrap /mnt base
-#syslinux coreutils base-devel \
-#alsa-utils acpi ntp openssh \
-#wget rsync mlocate \
-#dialog wpa_supplicant wireless_tools \
-#xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
-#xf86-input-synaptics xf86-video-intel mesa 
-#git abs go \
-#unzip unrar p7zip \
-#gptfdisk util-linux parted \
-#zsh grml-zsh-config zsh-completions \
-#vim gvim vlc gimp libreoffice \
-#dmenu slock surf \
-#mpd gnupg xsel
-
-
 echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
 umount -v /mnt/boot
+mkdir -v /mnt/etc
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
+mount -v -o remount /mnt
 mount -v $BOOT /mnt/boot
+
+echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
+pacstrap /mnt base
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt
