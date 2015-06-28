@@ -38,8 +38,8 @@ sudo mv -v /.xinitrc ~/.xinitrc
 sudo chown min:users ~/.xinitrc
 
 echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
-sudo mv -v /.zprofile ~/.zprofile
-sudo chown min:users ~/.zprofile
+sudo mv -v /.zlogin ~/.zlogin
+sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
