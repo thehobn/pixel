@@ -21,22 +21,22 @@ echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SSD keyfile --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=keyfile
 cryptsetup -v luksFormat $BOOT
-cryptsetup -v open --type luks $BOOT key
+cryptsetup -v open --type luks $BOOT boot
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
 vgcreate -v sys /dev/mapper/sys
 lvcreate -v -l +100%FREE sys -n root
-vgcreate -v key /dev/mapper/key
-lvcreate -v -l +100%FREE key -n boot
+#vgcreate -v key /dev/mapper/key
+#lvcreate -v -l +100%FREE key -n boot
 
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
-mkfs.btrfs -L boot -f /dev/mapper/key-boot
+mkfs.btrfs -L boot -f /dev/mapper/boot
 
 echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt
 mkdir -v /mnt/boot
-mount -v /dev/mapper/key-boot /mnt/boot
+mount -v /dev/mapper/boot /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v keyfile /mnt/boot
@@ -48,7 +48,7 @@ mkdir -v /mnt/etc
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
 mount -v -o remount /mnt
-mount -v /dev/mapper/key-boot /mnt/boot
+mount -v /dev/mapper/boot /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacstrap /mnt base base-devel
