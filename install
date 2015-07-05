@@ -12,27 +12,31 @@ mv -v /tmp/live.iso /mnt/boot
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
 parted -s $SSD mktable gpt
 parted -s $KEY mktable gpt 
-parted -s $KEY -- mkpart boot btrfs 2048s -34s
+parted -s $KEY -- mkpart boot 2048s -34s
 
 echo "$(tput setaf 6 & tput smso)Generating keyfile . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/urandom of=keyfile iflag=fullblock
 
-echo "$(tput setaf 6 & tput smso)Encrypting SSD . . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SSD keyfile --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=keyfile
+cryptsetup -v luksFormat $BOOT
+cryptsetup -v open --type luks $BOOT key
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
 vgcreate -v sys /dev/mapper/sys
 lvcreate -v -l +100%FREE sys -n root
+vgcreate -v key /dev/mapper/key
+lvcreate -v -l +100%FREE key -n boot
 
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
-mkfs.btrfs -L root /dev/mapper/sys-root
-mkfs.btrfs -L key -f $BOOT
+mkfs.btrfs -L root -f /dev/mapper/sys-root
+mkfs.btrfs -L boot -f /dev/mapper/key-boot
 
 echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt
 mkdir -v /mnt/boot
-mount -v $BOOT /mnt/boot
+mount -v /dev/mapper/key-boot /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v keyfile /mnt/boot
@@ -47,7 +51,7 @@ mount -v -o remount /mnt
 mount -v $BOOT /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacstrap /mnt base
+pacstrap /mnt base base-devel
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt

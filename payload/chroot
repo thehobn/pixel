@@ -9,15 +9,14 @@ chown root:root /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo base-devel wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions gvim vim slock surf mpd vlc libreoffice gimp abs dmenu syslinux gnupg xsel go polkit --noconfirm
+pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions gvim vim slock surf abs dmenu gnupg xsel go polkit grub --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
-cp -v -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux
-extlinux --install /boot/syslinux
-sgdisk $KEY --attributes=1:set:2
-dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/bios/gptmbr.bin of=$KEY
-mv -v /syslinux.cfg /boot/syslinux/syslinux.cfg
-chown root:root /boot/syslinux/syslinux.cfg
+mv -v /grub /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+chattr -i /boot/grub/i386-pc/core.img
+grub-install --target=i386-pc --recheck --debug --force /dev/mapper/key-boot
+chattr +i /boot/grub/i386-pc/core.img
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
