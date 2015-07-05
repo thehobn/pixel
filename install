@@ -48,7 +48,7 @@ mkdir -v /mnt/etc
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
 mount -v -o remount /mnt
-mount -v $BOOT /mnt/boot
+mount -v /dev/mapper/key-boot /mnt/boot
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacstrap /mnt base base-devel

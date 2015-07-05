@@ -31,9 +31,9 @@ mv -v ~/config.h ~/.builds/dwm/config.h
 cp -v ~/.builds/dwm/config.h ~/.builds/dwm/src/config.h
 cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
 
-echo "$(tput setaf 6 & tput smso)Installing drive . . .$(tput sgr0)"
-export GOPATH=~/.builds/gopath && go get -u github.com/odeke-em/drive/cmd/drive
-sudo cp ~/.builds/gopath/bin/drive /usr/bin
+#echo "$(tput setaf 6 & tput smso)Installing drive . . .$(tput sgr0)"
+#export GOPATH=~/.builds/gopath && go get -u github.com/odeke-em/drive/cmd/drive
+#sudo cp ~/.builds/gopath/bin/drive /usr/bin
 
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
 sudo mv -v /.xinitrc ~/.xinitrc
