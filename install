@@ -13,7 +13,7 @@ parted -s $SSD mktable gpt
 parted -s $SSD mkpart bios 34s 2047s
 parted -s $SSD set 1 bios_grub on
 parted -s $SSD mkpart boot 2048s 1000MiB
-parted -s $SSD -- mkpart sys 1000MiB -1s
+parted -s $SSD -- mkpart sys 1000MiB -34s
 parted -s $KEY mktable gpt
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
