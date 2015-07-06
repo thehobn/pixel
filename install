@@ -4,7 +4,7 @@ KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso 2>&1 /dev/null
+wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
 mv -v /tmp/live.iso /mnt/boot
 ) &
 
