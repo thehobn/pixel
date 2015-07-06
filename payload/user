@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
+KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+
 echo "$(tput setaf 6 & tput smso)Applying tsowell patch . . .$(tput sgr0)"
 mkdir -v ~/.builds
 cd ~/.builds && curl -LO https://github.com/tsowell/linux-samus/releases/download/v0.2.2/linux-samus-arch-0.2.2.tar
@@ -45,6 +48,7 @@ sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
+sudo cryptsetup luksAddKey $SSD-part2
 sudo mv -v /finish ~/finish
 sudo chown min:users ~/finish
 sudo rm /user
