@@ -15,7 +15,7 @@ parted -s $SSD set 1 bios_grub on
 parted -s $SSD mkpart boot 2048s 1000MiB
 parted -s $SSD -- mkpart sys 1000MiB -34s
 parted -s $KEY mktable gpt
-parted -s $KEY mkpart key 2048s 2096s
+parted -s $KEY mkpart key 2048s 1GiB
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
