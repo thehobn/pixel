@@ -48,7 +48,7 @@ sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
-sudo cryptsetup luksAddKey $SSD-part2
+sudo cryptsetup luksAddKey $SSD-part2 --key-file=/etc/boot
 sudo mv -v /finish ~/finish
 sudo chown min:users ~/finish
 sudo rm /user
