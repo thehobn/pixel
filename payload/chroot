@@ -13,7 +13,7 @@ pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xor
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
 mv -v /grub /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=i386-pc --recheck --debug $KEY
+grub-install --target=i386-pc --recheck --debug $SSD
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
