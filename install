@@ -9,13 +9,13 @@ mv -v /tmp/live.iso /mnt/boot
 ) &
 
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
-parted -s $SSD mktable gpt
-parted -s $SSD mkpart bios 34s 2047s
-parted -s $SSD set 1 bios_grub on
-parted -s $SSD mkpart boot 2048s 1000MiB
-parted -s $SSD -- mkpart sys 1000MiB -34s
-parted -s $KEY mktable gpt
-parted -s $KEY mkpart key 2048s 1GiB
+parted -s $SSD mktable gpt \
+	mkpart bios 34s 2047s \
+	set 1 bios_grub on \
+	mkpart boot 2048s 1000MiB \
+	mkpart sys 1000MiB 100%
+parted -s $KEY mktable gpt \
+	mkpart key 2048s 1GiB
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
