@@ -15,6 +15,7 @@ parted -s $SSD set 1 bios_grub on
 parted -s $SSD mkpart boot 2048s 1000MiB
 parted -s $SSD -- mkpart sys 1000MiB -34s
 parted -s $KEY mktable gpt
+parted -s $KEY mkpart key 2048s 2096s
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
@@ -33,6 +34,7 @@ lvcreate -v -l +100%FREE sys -n root
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
 mkfs.btrfs -L boot -f /dev/mapper/boot
+mkfs.btrfs -L key -f $KEY-part1
 
 echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt
@@ -49,7 +51,10 @@ echo boot	$SSD-part2	/etc/boot > /mnt/etc/crypttab
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v boot /mnt/etc
 shred -v boot -n 8 -z
-cp -v sys /mnt/boot
+mkdir key
+mount $KEY-part1 key
+cp -v sys key
+umount $KEY-part1
 shred -v sys -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
