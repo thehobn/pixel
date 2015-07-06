@@ -39,18 +39,18 @@ mount -v /dev/mapper/sys-root /mnt
 mkdir -v /mnt/boot
 mount -v /dev/mapper/boot /mnt/boot
 
+echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
+mkdir -v /mnt/etc
+genfstab -U -p /mnt > /mnt/etc/fstab
+sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
+mount -v -o remount /mnt
+echo boot	$SSD-part2	/etc/boot > /mnt/etc/crypttab
+
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
-mkdir -v /mnt/et
 cp -v boot /mnt/etc
 shred -v boot -n 8 -z
 cp -v sys /mnt/boot
 shred -v sys -n 8 -z
-
-echo "$(tput setaf 6 & tput smso)Generating fstab . . .$(tput sgr0)"
-genfstab -U -p /mnt >> /mnt/etc/fstab
-sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
-mount -v -o remount /mnt
-echo boot	$SSD-part2	/etc/boot >> /mnt/etc/crypttab
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacstrap /mnt base base-devel
