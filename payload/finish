@@ -1,5 +1,1 @@
-cd /home/min/.builds/linux-samus-arch-0.2.2 && ALSA_CONFIG_UCM=ucm/ alsaucm -c bdw-rt5677 set _verb HiFi
-amixer set Master 1
-sudo passwd
-sudo passwd min
-cd /home/min && rm finish
+cd ~ && ./.builds/linux-4.1-samus/scripts/setup/sound.sh && rm finish
