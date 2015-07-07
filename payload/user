@@ -3,17 +3,6 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-echo "$(tput setaf 6 & tput smso)Applying tsowell patch . . .$(tput sgr0)"
-mkdir -v ~/.builds
-cd ~/.builds && curl -LO https://github.com/tsowell/linux-samus/releases/download/v0.2.2/linux-samus-arch-0.2.2.tar
-tar xvf linux-samus-arch-0.2.2.tar
-cd ~/.builds/linux-samus-arch-0.2.2 && sudo pacman -U *.pkg.tar.xz --noconfirm
-sudo cp -v -r ~/.builds/linux-samus-arch-0.2.2/ucm/bdw-rt5677 /usr/share/alsa/ucm
-sudo chown -R root:root /usr/share/alsa/ucm/bdw-rt5677
-sudo mkdir /etc/acpi
-sudo mv -v /handler.sh /etc/acpi/handler.sh
-sudo chown root:root /etc/acpi/handler.sh
-
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
@@ -23,7 +12,7 @@ sudo sed -i 's/#AURURL/AURURL/' /etc/yaourtrc
 sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
 echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
-yaourt -Syua st-git-zsh --noconfirm
+yaourt -Syua linux-samus4 st-git-zsh --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
@@ -48,6 +37,7 @@ sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
+cd ~ && git clone https://github.com/raphael/linux-4.1-samus
 sudo cryptsetup luksAddKey $SSD-part2 --key-file=/etc/boot
 sudo mv -v /finish ~/finish
 sudo chown min:users ~/finish
