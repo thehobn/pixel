@@ -15,10 +15,10 @@ sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 mv -v /.config ~/.builds/linux-4.1-samus/build/linux
-cd linux-4.1-samus/build/linux
-make -j4
-sudo make modules_install
-sudo make install
+sudo chown min:users ~/.builds/linux-4.1-samus/build/linux/.config
+cd ~/.builds/linux-4.1-samus/build/linux && make -j4
+cd ~/.builds/linux-4.1-samus/build/linux && sudo make modules_install
+cd ~/.builds/linux-4.1-samus/build/linux && sudo make install
 sudo pacman -R linux linux-headers
 sudo mv -v /boot/vmlinuz-linux-samus4 /boot/vmlinuz-linux
 sudo mv -v /boot/initramfs-linux-samus4.img /boot/initramfs-linux.img
