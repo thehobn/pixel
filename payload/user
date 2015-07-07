@@ -12,8 +12,13 @@ cd ~/.builds/yaourt && makepkg -si --noconfirm
 sudo sed -i 's/#AURURL/AURURL/' /etc/yaourtrc
 sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
-echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
-yaourt -Syua linux-samus4 --noconfirm
+echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
+cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
+mv -v /.config ~/.builds/linux-4.1-samus/build/linux
+cd linux-4.1-samus/build/linux
+make -j4
+sudo make modules_install
+sudo make install
 sudo pacman -R linux linux-headers
 sudo mv -v /boot/vmlinuz-linux-samus4 /boot/vmlinuz-linux
 sudo mv -v /boot/initramfs-linux-samus4.img /boot/initramfs-linux.img
@@ -45,7 +50,6 @@ sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
-cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 sudo cryptsetup luksAddKey $SSD-part2 --key-file=/etc/boot
 sudo passwd
 sudo passwd min
