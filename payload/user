@@ -13,6 +13,8 @@ sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
 echo "$(tput setaf 6 & tput smso)Installing AUR packages . . .$(tput sgr0)"
 yaourt -Syua linux-samus4 st-git-zsh --noconfirm
+sudo mv -v vmlinuz-linux-samus4 vmlinuz-linux
+sudo mv -v initramfs-linux-samus4.img initramfs-linux.img
 
 echo "$(tput setaf 6 & tput smso)Installing DWM . . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
