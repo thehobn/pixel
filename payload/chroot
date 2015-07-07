@@ -8,7 +8,7 @@ chown root:root /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions gvim vim slock surf abs dmenu gnupg xsel go polkit grub --noconfirm
+pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions vim slock surf abs dmenu gnupg xsel go polkit grub --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
 mv -v /grub /etc/default/grub
