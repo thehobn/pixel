@@ -1,1 +1,2 @@
-cd ~ && ./.builds/linux-4.1-samus/scripts/setup/sound.sh && rm finish
+cd ~/.builds/linux-4.1-samus/scripts/setup && ./sound.sh
+cd ~ && rm finish
