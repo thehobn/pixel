@@ -18,9 +18,9 @@ sudo mv -v /.config ~/.builds/linux-4.1-samus/build/linux
 sudo chown min:users ~/.builds/linux-4.1-samus/build/linux/.config
 cd ~/.builds/linux-4.1-samus/build/linux && make -j4
 cd ~/.builds/linux-4.1-samus/build/linux && sudo make modules_install
-sudo pacman -R linux linux-headers
 sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux
 sudo mkinitcpio -k /boot/vmlinuz-linux -c /etc/mkinitcpio.conf -g /boot/initramfs-linux.img
+sudo pacman -R linux linux-headers
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
