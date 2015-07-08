@@ -1,6 +1,7 @@
 #!/bin/bash
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part2
 
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
@@ -20,8 +21,8 @@ dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=sys iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
-cryptsetup -v luksFormat $KEY-part2 key --batch-mode
-cryptsetup -v open --type luks $KEY-part2 key --key-file=boot
+cryptsetup -v luksFormat $BOOT key --batch-mode
+cryptsetup -v open --type luks $BOOT key --key-file=boot
 cryptsetup -v luksFormat $SSD sys --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=sys
 
