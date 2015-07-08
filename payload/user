@@ -16,7 +16,7 @@ echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 sudo mv -v /config ~/.builds/linux-4.1-samus/scripts/config
 sudo chown min:users ~/.builds/linux-4.1-samus/scripts/config
-cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
+cd ~/.builds/linux-4.1-samus/aur && makepkg -si --skipinteg --noconfirm
 sudo mv -v /boot/vmlinuz-linux-samus4 /boot/vmlinuz-linux
 sudo mv -v /boot/initramfs-linux-samus4.img /boot/initramfs-linux.img
 sudo pacman -R linux linux-headers
