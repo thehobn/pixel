@@ -1,0 +1,6 @@
+menuentry 'live iso' {
+	set isofile='/boot/live.iso'
+	loopback loop $isofile
+	linux (loop)/arch/boot/x86_64/vmlinuz archisolabel=isoinfo -d -i live.iso | grep "Volume id" img_dev=$imgdevpath img_loop=$isofile earlymodules=loop
+	initrd (loop)/arch/boot/x86_64/archiso.img
+}
