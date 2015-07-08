@@ -21,8 +21,8 @@ dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=sys iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
-cryptsetup -v luksFormat $BOOT key --batch-mode
-cryptsetup -v open --type luks $BOOT key --key-file=boot
+cryptsetup -v luksFormat $KEY-part2 boot --batch-mode
+cryptsetup -v open --type luks $KEY-part2 key --key-file=boot
 cryptsetup -v luksFormat $SSD sys --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=sys
 
