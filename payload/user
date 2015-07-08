@@ -19,7 +19,7 @@ sudo chown min:users ~/.builds/linux-4.1-samus/scripts/config
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --skipinteg --noconfirm
 sudo mv -v /grub /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=i386-pc --recheck --debug $SSD
+grub-install --target=i386-pc --recheck --debug $KEY
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm

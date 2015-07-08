@@ -9,53 +9,44 @@ mv -v /tmp/live.iso /mnt/boot
 ) &
 
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
-parted -s $SSD mktable gpt \
+parted -s $SSD mktable gpt
+parted -s $KEY mktable gpt \
 	mkpart bios 34s 2047s \
 	set 1 bios_grub on \
-	mkpart boot 2048s 1000MiB \
-	mkpart sys 1000MiB 100%
-parted -s $KEY mktable gpt \
-	mkpart key 2048s 1GiB
+	mkpart boot 2048s 100% \
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=sys iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
-cryptsetup -v luksFormat $SSD-part2 boot --batch-mode
-cryptsetup -v open --type luks $SSD-part2 boot --key-file=boot
-cryptsetup -v luksFormat $SSD-part3 sys --batch-mode
-cryptsetup -v open --type luks $SSD-part3 sys --key-file=sys
+cryptsetup -v luksFormat $KEY-part2 key --batch-mode
+cryptsetup -v open --type luks $KEY-part2 key --key-file=boot
+cryptsetup -v luksFormat $SSD sys --batch-mode
+cryptsetup -v open --type luks $SSD sys --key-file=sys
 
 echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
 vgcreate -v sys /dev/mapper/sys
 lvcreate -v -l +100%FREE sys -n root
+vgcreate -v key /dev/mapper/key
+lvcreate -v -l +100%FREE key -n boot
 
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
-mkfs.btrfs -L boot -f /dev/mapper/boot
-mkfs.btrfs -L key -f $KEY-part1
+mkfs.btrfs -L boot -f /dev/mapper/key-boot
 
-echo "$(tput setaf 6 & tput smso)Mounting filesystems . . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt -o compress=lzo
 mkdir -v /mnt/boot
-mount -v /dev/mapper/boot /mnt/boot
-
-echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacstrap /mnt base base-devel
-
-echo "$(tput setaf 6 & tput smso)Generating fstab and crypttab . . .$(tput sgr0)"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
-echo boot	$SSD-part2	/etc/boot >> /mnt/etc/crypttab
+mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v boot /mnt/etc
 shred -v boot -n 8 -z
-mkdir key
-mount $KEY-part1 key
-cp -v sys key
-umount $KEY-part1
+cp -v sys /mnt/boot
 shred -v sys -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
