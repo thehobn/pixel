@@ -10,11 +10,11 @@ mkinitcpio -p linux
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions vim slock surf abs dmenu gnupg xsel go polkit grub dvtm bc --noconfirm
 
-echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
-mv -v /grub /etc/default/grub
+#echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
+#mv -v /grub /etc/default/grub
 #mv -v /custom.cfg /boot/grub/custom.cfg
-grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=i386-pc --recheck --debug $SSD
+#grub-mkconfig -o /boot/grub/grub.cfg
+#grub-install --target=i386-pc --recheck --debug $SSD
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
