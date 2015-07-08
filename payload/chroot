@@ -12,7 +12,7 @@ pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xor
 
 echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
 mv -v /grub /etc/default/grub
-mv -v /custom.cfg /boot/grub/custom.cfg
+#mv -v /custom.cfg /boot/grub/custom.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=i386-pc --recheck --debug $SSD
 
