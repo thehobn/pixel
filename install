@@ -42,7 +42,7 @@ mkdir -v /mnt/boot
 pacstrap /mnt base base-devel
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
-mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
+mount -v /dev/mapper/key-boot /mnt/boot -o compress=lzo
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v boot /mnt/etc
