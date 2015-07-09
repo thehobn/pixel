@@ -41,7 +41,7 @@ chsh -s /usr/bin/zsh min
 echo dvtm >> /etc/zsh/zshrc
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
-echo'export EDITOR=vim' >> /etc/profile
+echo 'export EDITOR=vim' >> /etc/profile
 mv -v /vimrc /etc/vimrc
 chown root:root /etc/vimrc
 
