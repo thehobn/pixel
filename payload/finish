@@ -1,2 +1,4 @@
 cd ~/.builds/linux-4.1-samus/scripts/setup && ./sound.sh
+sudo xrandr --newmode "1280x850" 88.75 1280 1352 1480 1680 850 853 863 883 -hsync +vsync
+sudo xrandr --addmode eDP1 1280x850
 cd ~ && rm finish
