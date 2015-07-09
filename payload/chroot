@@ -2,19 +2,19 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-echo "$(tput setaf 6 & tput smso)Building kernel . . .$(tput sgr0)"
-mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
-chown root:root /etc/mkinitcpio.conf
-mkinitcpio -p linux
-
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-pacman -S dialog wpa_supplicant wireless_tools xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp xf86-input-synaptics xf86-video-intel mesa alsa-utils acpi sudo wget git ntp rsync mlocate openssh unzip unrar p7zip gptfdisk util-linux parted coreutils zsh grml-zsh-config zsh-completions vim slock surf abs dmenu gnupg xsel go polkit grub dvtm bc --noconfirm
-
-#echo "$(tput setaf 6 & tput smso)Configuring bootloader . . .$(tput sgr0)"
-#mv -v /grub /etc/default/grub
-#mv -v /custom.cfg /boot/grub/custom.cfg
-#grub-mkconfig -o /boot/grub/grub.cfg
-#grub-install --target=i386-pc --recheck --debug $SSD
+pacman -R linux --noconfirm
+pacman -Syyu dialog wpa_supplicant wireless_tools \
+	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
+	xf86-input-synaptics xf86-video-intel mesa \
+	alsa-utils acpi \
+	wget git ntp rsync mlocate openssh \
+	unzip unrar p7zip \
+	gptfdisk parted \
+	zsh grml-zsh-config zsh-completions \
+	vim \
+	slock surf abs dmenu \
+	gnupg xsel go polkit grub dvtm --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
@@ -38,6 +38,7 @@ systemctl daemon-reload
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
+echo dvtm >> /etc/zsh/zshrc
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 echo'export EDITOR=vim' >> /etc/profile
