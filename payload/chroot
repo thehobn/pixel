@@ -38,7 +38,7 @@ systemctl daemon-reload
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
-echo dvtm >> /etc/zsh/zshrc
+#echo dvtm >> /etc/zsh/zshrc
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 echo 'export EDITOR=vim' >> /etc/profile
