@@ -50,7 +50,9 @@ touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Finishing up . .$(tput sgr0)"
 sudo cryptsetup luksAddKey $KEY-part2 --key-file=/etc/boot
-sudo passwd
+echo "$(tput setaf 6 & tput smso)Setting root password . . .$(tput sgr0)"
+sudo passwd root
+echo "$(tput setaf 6 & tput smso)Setting user password. . .$(tput sgr0)"
 sudo passwd min
 sudo mv -v /finish ~/finish
 sudo chown min:users ~/finish
