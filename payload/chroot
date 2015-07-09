@@ -7,7 +7,7 @@ pacman -R linux --noconfirm
 pacman -Syyu dialog wpa_supplicant wireless_tools \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
-	alsa-utils acpi \
+	alsa-utils acpi pulseaudio \
 	wget git ntp rsync mlocate openssh \
 	unzip unrar p7zip \
 	gptfdisk parted \
