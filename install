@@ -3,12 +3,6 @@ SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 BOOT=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part2
 
-(
-echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
-mv -v /tmp/live.iso /mnt/boot
-) &
-
 echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
 parted -s $SSD mktable gpt
 parted -s $KEY mktable gpt \
@@ -43,6 +37,12 @@ pacstrap /mnt base base-devel
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
 mount -v /dev/mapper/key-boot /mnt/boot -o compress=lzo
+
+(
+echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
+wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
+mv -v /tmp/live.iso /mnt/boot
+) &
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v boot /mnt/etc
