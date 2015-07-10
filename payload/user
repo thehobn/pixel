@@ -48,8 +48,8 @@ sudo mv -v /.zlogin ~/.zlogin
 sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
-echo "$(tput setaf 6 & tput smso)Initializing sound . . .$(tput sgr0)"
-cd ~/.builds/linux-4.1-samus/scripts/setup && ./sound.sh
+#echo "$(tput setaf 6 & tput smso)Initializing sound . . .$(tput sgr0)"
+#cd ~/.builds/linux-4.1-samus/scripts/setup && ./sound.sh
 
 echo "$(tput setaf 6 & tput smso)Adding custom xrandr mode . . .$(tput sgr0)"
 sudo xrandr --newmode "1280x850" 88.75 1280 1352 1480 1680 850 853 863 883 -hsync +vsync
