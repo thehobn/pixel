@@ -35,6 +35,7 @@ mkdir -v /mnt/boot
 pacstrap /mnt base base-devel
 genfstab -U -p /mnt >> /mnt/etc/fstab
 sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
+rm /boot/*
 mount -v /dev/mapper/key-boot /mnt/boot -o compress=lzo
 
 (
