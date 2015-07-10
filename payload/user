@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
-KEY=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
+SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 mkdir ~/.builds
@@ -20,7 +20,7 @@ sudo chown min:users ~/.builds/linux-4.1-samus/scripts/config
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --skipinteg --noconfirm
 sudo mv -v /grub /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-sudo grub-install --target=i386-pc --recheck --debug $KEY
+sudo grub-install --target=i386-pc --recheck --debug $SD
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
@@ -56,7 +56,7 @@ sudo xrandr --newmode "1280x850" 88.75 1280 1352 1480 1680 850 853 863 883 -hsyn
 sudo xrandr --addmode eDP1 1280x850
 
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for /boot . . .$(tput sgr0)"
-sudo cryptsetup luksAddKey $KEY-part2 --key-file=/etc/boot
+sudo cryptsetup luksAddKey $SD-part2 --key-file=/etc/boot
 
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for / . . .$(tput sgr0)"
 sudo cryptsetup luksAddKey $SSD --key-file=/boot/sys
