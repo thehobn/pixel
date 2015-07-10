@@ -8,13 +8,12 @@ pacman -Syyu dialog wpa_supplicant wireless_tools \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio \
-	wget git ntp rsync mlocate openssh \
-	unzip unrar p7zip \
+	openssh \
 	gptfdisk parted \
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf abs dmenu \
-	gnupg xsel go polkit grub dvtm --noconfirm
+	gnupg xsel polkit grub dvtm --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
