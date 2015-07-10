@@ -16,7 +16,7 @@ dd bs=1024 count=8 if=/dev/random of=tmp iflag=fullblock
 echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
 cryptsetup -v luksFormat $SD-part2 tmp --batch-mode
 cryptsetup -v open --type luks $SD-part2 boot --key-file=tmp
-cryptsetup luksRemoveKey $SD-part2 --key-file=tmp
+cryptsetup luksRemoveKey $SD-part2 --key-file=tmp --batch-mode
 shred -v tmp -n 8 -z
 cryptsetup -v luksFormat $SSD key --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=key
