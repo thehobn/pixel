@@ -4,7 +4,7 @@ SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -R linux --noconfirm
-pacman -Syyu dialog wpa_supplicant wireless_tools \
+pacman -Syyu connman wpa_supplicant \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio \
@@ -27,8 +27,8 @@ echo "$(tput setaf 6 & tput smso)Setting hostname and adding user . . .$(tput sg
 echo pixel > /etc/hostname
 useradd -m -g users -G wheel min
 
-echo "$(tput setaf 6 & tput smso)Enable dhcpcd . . .$(tput sgr0)"
-systemctl enable dhcpcd.service
+#echo "$(tput setaf 6 & tput smso)Enable dhcpcd . . .$(tput sgr0)"
+#systemctl enable dhcpcd.service
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
 mv -v /getty@tty1.service /etc/systemd/system/getty.target.wants
@@ -69,10 +69,10 @@ chown root:root /etc/modprobe.d/alsa-base.conf
 mv -v /asound.conf /etc/asound.conf
 chown root:root /etc/asound.conf
 
-echo "$(tput setaf 6 & tput smso)Setting up WiFi . . .$(tput sgr0)"
-mv -v /wpa_supplicant-wlp1s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
-chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
-systemctl enable wpa_supplicant@wlp1s0.service
+#echo "$(tput setaf 6 & tput smso)Setting up WiFi . . .$(tput sgr0)"
+#mv -v /wpa_supplicant-wlp1s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
+#chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp1s0.conf
+#systemctl enable wpa_supplicant@wlp1s0.service
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv config.h /home/min/
