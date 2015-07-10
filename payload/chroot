@@ -33,7 +33,6 @@ systemctl enable dhcpcd.service
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
 mv -v /getty@tty1.service /etc/systemd/system/getty.target.wants
-systemctl daemon-reload
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root
