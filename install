@@ -11,12 +11,12 @@ parted -s $KEY mktable gpt \
 	mkpart boot 2048s 100% \
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
-dd bs=1024 count=8 if=/dev/random of=boot iflag=fullblock
+dd bs=1024 count=8 if=/dev/random of=key iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=sys iflag=fullblock
 
 echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
-cryptsetup -v luksFormat $KEY-part2 boot --batch-mode
-cryptsetup -v open --type luks $KEY-part2 key --key-file=boot
+cryptsetup -v luksFormat $KEY-part2 key --batch-mode
+cryptsetup -v open --type luks $KEY-part2 key --key-file=key
 cryptsetup -v luksFormat $SSD sys --batch-mode
 cryptsetup -v open --type luks $SSD sys --key-file=sys
 
@@ -45,8 +45,8 @@ mv -v /tmp/live.iso /mnt/boot
 ) &
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
-cp -v boot /mnt/etc
-shred -v boot -n 8 -z
+cp -v key /mnt/etc
+shred -v key -n 8 -z
 cp -v sys /mnt/boot
 shred -v sys -n 8 -z
 
