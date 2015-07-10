@@ -47,7 +47,7 @@ touch ~/.hushlogin
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for /boot . . .$(tput sgr0)"
 sudo cryptsetup luksAddKey $SD-part2 --key-file=/etc/tmp
 sudo cryptsetup luksRemoveKey $SD-part2 --key-file=/etc/tmp --batch-mode
-shred -v /etc/tmp -n 8 -z
+sudo shred -v /etc/tmp -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for / . . .$(tput sgr0)"
 sudo cryptsetup luksAddKey $SSD --key-file=/boot/key
