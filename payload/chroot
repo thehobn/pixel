@@ -8,7 +8,7 @@ pacman -Syyu connman wpa_supplicant \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio \
-	git openssh \
+	wget git openssh \
 	gptfdisk parted \
 	zsh grml-zsh-config zsh-completions \
 	vim \
