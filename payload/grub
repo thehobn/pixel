@@ -2,7 +2,7 @@ GRUB_DEFAULT=0
 GRUB_TIMEOUT=0
 GRUB_DISTRIBUTOR="Arch"
 GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 rd.udev.log-priority=3"
-GRUB_CMDLINE_LINUX="cryptkey=/dev/disk/by-label/boot:btrfs:/key cryptdevice=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12:sys root=/dev/mapper/sys-root rw"
+GRUB_CMDLINE_LINUX="cryptkey=/boot/key cryptdevice=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12:sys root=/dev/mapper/sys-root rw"
 
 # Preload both GPT and MBR modules so that they are not missed
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
