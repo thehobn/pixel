@@ -5,7 +5,7 @@ exec tail -n +3 $0
 # the 'exec tail' line above.
 
 menuentry 'live iso' {
-	set isofile='/boot/live.iso'
+	set isofile='/live.iso'
 	loopback loop $isofile
 	linux (loop)/arch/boot/x86_64/vmlinuz archisodevice=/dev/loop0 img_dev=$imgdevpath img_loop=$isofile
 	initrd (loop)/arch/boot/x86_64/archiso.img
