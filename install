@@ -7,7 +7,8 @@ parted -s $SSD mktable gpt
 parted -s $SD mktable gpt \
 	mkpart bios 34s 2047s \
 	set 1 bios_grub on \
-	mkpart boot 2048s 1GiB
+	mkpart boot 2048s 1GiB \
+	mkpart iso 1GiB 2GiB
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=key iflag=fullblock
@@ -26,6 +27,7 @@ lvcreate -v -l +100%FREE sys -n root
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
 mkfs.btrfs -L boot -f /dev/mapper/boot
+mkfs.btrfs -L iso -f $SD-part3
 
 echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt -o compress=lzo
@@ -39,7 +41,10 @@ mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
 wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
-mv -v /tmp/live.iso /mnt/boot
+cp -v /tmp/live.iso /mnt/boot
+mkdir -v /mnt/boot/iso
+mount $SD-part3 /mnt/boot/iso
+cp -v /tmp/live.iso /mnt/boot/iso
 ) &
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
