@@ -19,7 +19,7 @@ sudo mv -v /config ~/.builds/linux-4.1-samus/scripts/config
 sudo chown min:users ~/.builds/linux-4.1-samus/scripts/config
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --skipinteg --noconfirm
 sudo mv -v /grub /etc/default/grub
-sudo mv -v /custom.cfg /boot/grub/custom.cfg
+sudo mv -v /40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo grub-install --target=i386-pc --recheck --debug $SD
 
