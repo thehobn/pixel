@@ -5,8 +5,7 @@ exec tail -n +3 $0
 # the 'exec tail' line above.
 
 menuentry 'live iso' {
-	set iso='/live.iso'
-	loopback loop $iso
-	linux (loop)/arch/boot/x86_64/vmlinuz archisodevice=/dev/loop0 img_dev=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part3 img_loop=$iso
+	loopback loop (hd0,gpt3)/live.iso
+	linux (loop)/arch/boot/x86_64/vmlinuz archisodevice=/dev/loop0 img_dev=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0-part3 img_loop=/live.iso
 	initrd (loop)/arch/boot/x86_64/archiso.img
 }

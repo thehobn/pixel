@@ -41,10 +41,11 @@ mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
 wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
-cp -v /tmp/live.iso /mnt/boot
 mkdir -v /mnt/boot/iso
 mount $SD-part3 /mnt/boot/iso
 cp -v /tmp/live.iso /mnt/boot/iso
+umount $SD-part3
+rmdir /mnt/boot/iso
 ) &
 
 echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
