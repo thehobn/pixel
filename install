@@ -46,6 +46,7 @@ echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
 cp -v tmp /mnt/etc
 shred -v tmp -n 8 -z
 cp -v key /mnt/boot
+cp -v key /mnt/crypto_keyfile.bin
 shred -v key -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
