@@ -8,7 +8,8 @@ parted -s $SD mktable gpt \
 	mkpart bios 34s 2047s \
 	set 1 bios_grub on \
 	mkpart boot 2048s 100MiB \
-	mkpart iso 100MiB 1GiB
+	mkpart iso 100MiB 1GiB \
+	mkpart clone 1GiB 100%
 
 echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=key iflag=fullblock
@@ -58,3 +59,4 @@ shred -v key -n 8 -z
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt
 arch-chroot /mnt ./chroot
+dd if=$SSD of=$SD-part4
