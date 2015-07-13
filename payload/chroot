@@ -4,7 +4,7 @@ SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -R linux --noconfirm
-pacman -Syyu connman wpa_supplicant \
+pacman -Syyu connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio \
