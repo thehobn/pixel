@@ -28,7 +28,7 @@ lvcreate -v -l +100%FREE sys -n root
 echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
 mkfs.btrfs -L boot -f /dev/mapper/boot
-mkfs.btrfs -L iso -f $SD-part3
+mkfs.btrfs -f $SD-part3
 
 echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt -o compress=lzo
