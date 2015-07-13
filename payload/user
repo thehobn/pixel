@@ -39,6 +39,8 @@ cd ~/.builds/st && makepkg -si --skipinteg --noconfirm
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
 sudo mv -v /.xinitrc ~/.xinitrc
 sudo chown min:users ~/.xinitrc
+sudo mv -v /.xbindkeysrc ~/.xbindkeysrc
+sudo chown min:users ~/.xbindkeysrc
 
 echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
 sudo mv -v /.zlogin ~/.zlogin

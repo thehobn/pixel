@@ -13,7 +13,7 @@ pacman -Syyu connman wpa_supplicant \
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf abs dmenu \
-	gnupg xsel polkit grub dvtm btrfs-progs --noconfirm
+	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
