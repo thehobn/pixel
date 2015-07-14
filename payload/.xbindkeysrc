@@ -1,2 +1,8 @@
+"slock & systemctl suspend"
+	Mod4 + XF86PowerOff
+
+"slock"
+	XF86PowerOff
+
 "dvtm st"
 	Mod4 + t
