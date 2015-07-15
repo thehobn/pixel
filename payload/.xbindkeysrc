@@ -4,5 +4,5 @@
 "slock"
 	XF86PowerOff
 
-"dvtm st"
+"st -e dvtm"
 	Mod4 + t
