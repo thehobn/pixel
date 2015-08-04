@@ -5,8 +5,8 @@ SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
 mkdir ~/.builds
-cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
-cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
+cd ~/.builds && wget https://aur4.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
+cd ~/.builds && wget https://aur4.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
 cd ~/.builds/package-query && makepkg -si --noconfirm
 cd ~/.builds/yaourt && makepkg -si --noconfirm
 sudo sed -i 's/#AURURL/AURURL/' /etc/yaourtrc
@@ -14,10 +14,7 @@ sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 sudo mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
-cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
-sudo mv -v /config ~/.builds/linux-4.1-samus/scripts/config
-sudo chown min:users ~/.builds/linux-4.1-samus/scripts/config
-cd ~/.builds/linux-4.1-samus/aur && makepkg -si --skipinteg --noconfirm
+yaourt -Syyua linux-samus4
 sudo mv -v /grub /etc/default/grub
 sudo mv -v /40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg

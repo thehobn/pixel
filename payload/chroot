@@ -7,7 +7,7 @@ pacman -R linux --noconfirm
 pacman -Syyu connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
-	alsa-utils acpi pulseaudio \
+	alsa-utils acpi pulseaudio pulseaudio-alsa\
 	wget git openssh \
 	gptfdisk parted \
 	zsh grml-zsh-config zsh-completions \
@@ -36,7 +36,6 @@ mv -v /getty@tty1.service /etc/systemd/system/getty.target.wants
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
-#echo dvtm >> /etc/zsh/zshrc
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 echo 'export EDITOR=vim' >> /etc/profile
