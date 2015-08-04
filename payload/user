@@ -14,7 +14,7 @@ sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 sudo mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
-yaourt -Syyua linux-samus4
+yaourt -Syyua linux-samus4 --noconfirm
 sudo mv -v /grub /etc/default/grub
 sudo mv -v /40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg
