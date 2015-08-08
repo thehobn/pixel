@@ -11,11 +11,11 @@ cd ~/.builds/package-query && makepkg -si --noconfirm
 cd ~/.builds/yaourt && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
-sudo mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
+sudo mv -v /tmp/mkinitcpio.conf /etc/mkinitcpio.conf
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
-sudo mv -v /grub /etc/default/grub
-sudo mv -v /40_custom /etc/grub.d/40_custom
+sudo mv -v /tmp/grub /etc/default/grub
+sudo mv -v /tmp/40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo grub-install --target=i386-pc --recheck --debug $SD
 
@@ -33,13 +33,13 @@ sudo chown min:users ~/.builds/st/PKGBUILD
 cd ~/.builds/st && makepkg -si --skipinteg --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
-sudo mv -v /.xinitrc ~/.xinitrc
+sudo mv -v /tmp/.xinitrc ~/.xinitrc
 sudo chown min:users ~/.xinitrc
-sudo mv -v /.xbindkeysrc ~/.xbindkeysrc
+sudo mv -v /tmp/.xbindkeysrc ~/.xbindkeysrc
 sudo chown min:users ~/.xbindkeysrc
 
 echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
-sudo mv -v /.zlogin ~/.zlogin
+sudo mv -v /tmp/.zlogin ~/.zlogin
 sudo chown min:users ~/.zlogin
 touch ~/.hushlogin
 
@@ -58,6 +58,6 @@ echo "$(tput setaf 6 & tput smso)Setting user password. . .$(tput sgr0)"
 sudo passwd min
 
 echo "$(tput setaf 6 & tput smso)Cleaning up . . .$(tput sgr0)"
-sudo mv -v /finish /home/min/finish
+sudo mv -v /tmp/finish /home/min/finish
 sudo chown min:users /home/min/finish
 sudo rm /user

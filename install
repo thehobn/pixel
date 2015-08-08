@@ -30,11 +30,10 @@ mkfs.btrfs -L boot -f /dev/mapper/boot
 mkfs.btrfs -L iso -f $SD-part3
 
 echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
-mount -v /dev/mapper/sys-root /mnt -o compress=lzo
+mount -v /dev/mapper/sys-root /mnt -o noatime,discard,compress=lzo
 mkdir -v /mnt/boot
 pacstrap /mnt base base-devel
 genfstab -U -p /mnt >> /mnt/etc/fstab
-sed -i 's/relatime/noatime,discard,compress=lzo/g' /mnt/etc/fstab
 rm /mnt/boot/*
 mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 
@@ -54,5 +53,5 @@ cp -v key /mnt/crypto_keyfile.bin
 shred -v key -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-cp -v -r payload/. /mnt
-arch-chroot /mnt ./chroot
+cp -v -r payload/. /mnt/tmp
+arch-chroot /mnt ./tmp/chroot

@@ -31,7 +31,7 @@ echo "$(tput setaf 6 & tput smso)Enable connman . . .$(tput sgr0)"
 systemctl enable connman.service
 
 echo "$(tput setaf 6 & tput smso)Set autologin . . .$(tput sgr0)"
-mv -v /getty@tty1.service /etc/systemd/system/getty.target.wants
+mv -v /tmp/getty@tty1.service /etc/systemd/system/getty.target.wants
 
 echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
 chsh -s /usr/bin/zsh root
@@ -39,30 +39,30 @@ chsh -s /usr/bin/zsh min
 
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 echo 'export EDITOR=vim' >> /etc/profile
-mv -v /vimrc /etc/vimrc
+mv -v /tmp/vimrc /etc/vimrc
 chown root:root /etc/vimrc
 
 echo "$(tput setaf 6 & tput smso)Setting up sudo and su . . .$(tput sgr0)"
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-mv -v /su /etc/pam.d/su
+mv -v /tmp/su /etc/pam.d/su
 chown root:root /etc/pam.d/su
 
 echo "$(tput setaf 6 & tput smso)Editing logind . . .$(tput sgr0)"
-mv -v /logind.conf /etc/systemd/logind.conf
+mv -v /tmp/logind.conf /etc/systemd/logind.conf
 chown root:root /etc/systemd/logind.conf
 
 echo "$(tput setaf 6 & tput smso)Editing xorg.conf . . .$(tput sgr0)"
-mv -v /10-keyboard.conf /etc/X11/xorg.conf.d/10-keyboard.conf
-mv -v /10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
-mv -v /20-intel.conf /etc/X11/xorg.conf.d/20-intel.conf
-mv -v /50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
+mv -v /tmp/10-keyboard.conf /etc/X11/xorg.conf.d/10-keyboard.conf
+mv -v /tmp/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
+mv -v /tmp/20-intel.conf /etc/X11/xorg.conf.d/20-intel.conf
+mv -v /tmp/50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
 
 echo "$(tput setaf 6 & tput smso)Configuring dmenu bin . . .$(tput sgr0)"
-mv -v /dmenu_run /usr/local/bin
+mv -v /tmp/dmenu_run /usr/local/bin
 echo dmenu_run > /usr/local/bin/.exclude
 touch /usr/local/sbin/.exclude
-mv -v /xdrt /usr/local/bin
-mv -v /T /usr/local/bin
+mv -v /tmp/xdrt /usr/local/bin
+mv -v /tmp/T /usr/local/bin
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv config.h /home/min/
