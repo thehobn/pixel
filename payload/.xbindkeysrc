@@ -6,6 +6,3 @@
 
 "xdrt"
 	XF86Display
-
-"st -e dvtm"
-	Mod4 + t
