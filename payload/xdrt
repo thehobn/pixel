@@ -1,0 +1,4 @@
+case $(xrandr | grep \*) in
+	*2560x1700*)	xrandr -s 1280x850;;
+	*1280x850*)	xrandr -s 2560x1700;;
+esac
