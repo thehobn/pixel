@@ -12,7 +12,8 @@ cd ~/.builds/yaourt && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 sudo mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
-yaourt -Syyua linux-samus4 --noconfirm
+cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
+cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
 sudo mv -v /grub /etc/default/grub
 sudo mv -v /40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg
