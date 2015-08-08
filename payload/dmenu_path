@@ -1,0 +1,2 @@
+ls -1 /usr/local/sbin | grep -v -f /usr/local/sbin/.exclude
+ls -1 /usr/local/bin | grep -v -f /usr/local/bin/.exclude

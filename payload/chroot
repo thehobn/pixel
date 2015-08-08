@@ -61,12 +61,6 @@ mv -v /dmenu_run /usr/local/bin
 echo dmenu_run > /usr/local/bin/.exclude
 mv -v /xdrt /usr/local/bin
 
-echo "$(tput setaf 6 & tput smso)Fixing audio . . .$(tput sgr0)"
-mv -v /alsa-base.conf /etc/modprobe.d/alsa-base.conf
-chown root:root /etc/modprobe.d/alsa-base.conf
-mv -v /asound.conf /etc/asound.conf
-chown root:root /etc/asound.conf
-
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 mv config.h /home/min/
 rm chroot
