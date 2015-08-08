@@ -9,8 +9,6 @@ cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package
 cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
 cd ~/.builds/package-query && makepkg -si --noconfirm
 cd ~/.builds/yaourt && makepkg -si --noconfirm
-sudo sed -i 's/#AURURL/AURURL/' /etc/yaourtrc
-sudo sed -i 's/aur/aur4/' /etc/yaourtrc
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 sudo mv -v /mkinitcpio.conf /etc/mkinitcpio.conf
