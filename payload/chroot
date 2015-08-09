@@ -1,6 +1,5 @@
 #!/bin/bash
 
-pacman -R linux --noconfirm
 reflector --verbose -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
