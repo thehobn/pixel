@@ -1,8 +1,8 @@
 slock &
+xbindkeys &
+setxkbmap -option caps:none &
 pulseaudio -D &
-export _JAVA_AWT_WM_NONREPARENTING=1 &
 xset s off &
 xset -dpms &
-xbindkeys &
-exec dwm &
-setxkbmap -option caps:none
+export _JAVA_AWT_WM_NONREPARENTING=1 &
+exec dwm
