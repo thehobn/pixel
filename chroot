@@ -2,6 +2,8 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
+umount /tmp
+
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 cp -v /tmp/pacman.conf /mnt/etc
 sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist
@@ -43,16 +45,13 @@ chsh -s /usr/bin/zsh min
 echo "$(tput setaf 6 & tput smso)Configuring vim . . .$(tput sgr0)"
 echo 'export EDITOR=vim' >> /etc/profile
 mv -v /tmp/vimrc /etc/vimrc
-chown root:root /etc/vimrc
 
 echo "$(tput setaf 6 & tput smso)Setting up sudo and su . . .$(tput sgr0)"
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 mv -v /tmp/su /etc/pam.d/su
-chown root:root /etc/pam.d/su
 
 echo "$(tput setaf 6 & tput smso)Editing logind . . .$(tput sgr0)"
 mv -v /tmp/logind.conf /etc/systemd/logind.conf
-chown root:root /etc/systemd/logind.conf
 
 echo "$(tput setaf 6 & tput smso)Editing xorg.conf . . .$(tput sgr0)"
 mv -v /tmp/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf

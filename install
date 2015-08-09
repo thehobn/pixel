@@ -53,6 +53,6 @@ cp -v key /mnt/crypto_keyfile.bin
 shred -v key -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-cp -v -r payload/. /tmp
-mount --bind /tmp /mnt/tmp
-arch-chroot /mnt ./tmp/chroot
+mount --bind payload /mnt/tmp
+cp -v chroot /mnt
+arch-chroot /mnt ./chroot
