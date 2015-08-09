@@ -43,7 +43,7 @@ pacstrap /mnt base base-devel \
 	gptfdisk parted \
 	zsh grml-zsh-config zsh-completions \
 	vim \
-	slock surf abs dmenu \
+	slock surf dmenu \
 	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector
 
 (

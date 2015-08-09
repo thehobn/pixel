@@ -17,6 +17,7 @@ provides=('dwm')
 conflicts=('dwm')
 epoch=1
 source=("$_pkgname::git+http://git.suckless.org/dwm")
+sha1sums=('SKIP')
 
 prepare() {
   if [[ -f $SRCDEST/config.h ]]; then

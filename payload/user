@@ -13,7 +13,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo grub-install --target=i386-pc --recheck --debug $SD
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
-cd ~/.builds/dwm && makepkg -si --skipinteg --noconfirm
+cd ~/.builds/dwm && makepkg -si --noconfirm
 cd ~/.builds/st && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for /boot . . .$(tput sgr0)"
