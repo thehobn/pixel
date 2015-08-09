@@ -4,4 +4,5 @@ export _JAVA_AWT_WM_NONREPARENTING=1 &
 xset s off &
 xset -dpms &
 xbindkeys &
-exec dwm
+exec dwm &
+setxkbmap -option caps:none
