@@ -22,7 +22,7 @@ mv -v ~/config.h ~/.builds/dwm/config.h
 cp -v ~/.builds/dwm/config.h ~/.builds/dwm/src/config.h
 cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
 mkdir ~/.builds/st
-sudo mv /PKGBUILD ~/.builds/st
+sudo mv /tmp/PKGBUILD ~/.builds/st
 sudo chown min:users ~/.builds/st/PKGBUILD
 cd ~/.builds/st && makepkg -si --skipinteg --noconfirm
 
@@ -54,4 +54,4 @@ sudo passwd min
 echo "$(tput setaf 6 & tput smso)Cleaning up . . .$(tput sgr0)"
 sudo mv -v /tmp/finish /home/min/finish
 sudo chown min:users /home/min/finish
-sudo rm /user
+sudo rm /tmp/user
