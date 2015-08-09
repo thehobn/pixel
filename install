@@ -35,7 +35,7 @@ genfstab -U -p /mnt >> payload/etc/fstab
 mkdir /mnt/boot
 mount /dev/mapper/boot /mnt/boot -o compress=lzo
 pacstrap /mnt base base-devel \
-	connman wpa_supplicant wireless-tools \
+	connman wpa_supplicant wireless_tools \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio pulseaudio-alsa \
