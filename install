@@ -1,8 +1,6 @@
-#!/bin/bash
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-echo "$(tput setaf 6 & tput smso)Creating new GPT tables . . .$(tput sgr0)"
 parted -s $SSD mktable gpt
 parted -s $SD mktable gpt \
 	mkpart bios 34s 2047s \
@@ -10,33 +8,35 @@ parted -s $SD mktable gpt \
 	mkpart boot 2048s 100MiB \
 	mkpart iso 100MiB 1GiB \
 
-echo "$(tput setaf 6 & tput smso)Generating keyfiles . . .$(tput sgr0)"
 dd bs=1024 count=8 if=/dev/random of=key iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=tmp iflag=fullblock
 
-echo "$(tput setaf 6 & tput smso)Encrypting . . .$(tput sgr0)"
-cryptsetup -v luksFormat $SSD key --batch-mode
-cryptsetup -v open --type luks $SSD sys --key-file=key
-cryptsetup -v luksFormat $SD-part2 tmp --batch-mode
-cryptsetup -v open --type luks $SD-part2 boot --key-file=tmp
+cryptsetup luksFormat $SSD key --batch-mode
+cryptsetup open --type luks $SSD sys --key-file=key
+cryptsetup luksFormat $SD-part2 tmp --batch-mode
+cryptsetup open --type luks $SD-part2 boot --key-file=tmp
 
-echo "$(tput setaf 6 & tput smso)Creating LVM . . .$(tput sgr0)"
-vgcreate -v sys /dev/mapper/sys
-lvcreate -v -l +100%FREE sys -n root
+vgcreate sys /dev/mapper/sys
+lvcreate -l +100%FREE sys -n root
 
-echo "$(tput setaf 6 & tput smso)Making filesystems . . .$(tput sgr0)"
 mkfs.btrfs -L root -f /dev/mapper/sys-root
 mkfs.btrfs -L boot -f /dev/mapper/boot
 mkfs.btrfs -L iso -f $SD-part3
 
-echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
-mount -v /dev/mapper/sys-root /mnt -o noatime,discard,compress=lzo
+(
+wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
+mkdir /tmp/iso
+mount $SD-part3 /tmp/iso
+cp /tmp/live.iso /tmp/iso
+) &
+
+mount /dev/mapper/sys-root /mnt -o noatime,discard,compress=lzo
 genfstab -U -p /mnt >> payload/etc/fstab
 mkdir /mnt/boot
-mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
+mount /dev/mapper/boot /mnt/boot -o compress=lzo
 pacstrap /mnt base base-devel \
-	connman wpa_supplicant wireless_tools \
-	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
+	connman wpa_supplicant wireless-tools \
+	xorg-server xorg-server-utils xorg-xinit xorg-utils \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio pulseaudio-alsa \
 	wget git openssh \
@@ -46,21 +46,11 @@ pacstrap /mnt base base-devel \
 	slock surf dmenu \
 	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector
 
-(
-echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
-mkdir -v /tmp/iso
-mount $SD-part3 /tmp/iso
-cp -v /tmp/live.iso /tmp/iso
-) &
+cp tmp /mnt/etc
+cp key /mnt/boot
+chmod 000 /mnt/boot/key
+cp key /mnt/crypto_keyfile.bin
+chmod 000 /mnt/crypto_keyfile.bin
 
-echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
-cp -v tmp /mnt/etc
-shred -v tmp -n 8 -z
-cp -v key /mnt/boot
-cp -v key /mnt/crypto_keyfile.bin
-shred -v key -n 8 -z
-
-echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-rsync -rv payload/. /mnt
+rsync -r payload/. /mnt
 arch-chroot /mnt ./chroot

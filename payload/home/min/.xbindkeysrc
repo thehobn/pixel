@@ -1,5 +1,5 @@
-"slock & systemctl suspend"
+"(physlock -l && slock && physlock -L) & systemctl suspend"
 	Mod4 + XF86PowerOff
 
-"slock"
+"physlock -l && slock && physlock -L"
 	XF86PowerOff
