@@ -62,5 +62,5 @@ cp -v key /mnt/crypto_keyfile.bin
 shred -v key -n 8 -z
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-rsync -urv payload/. /mnt
+rsync -rv payload/. /mnt
 arch-chroot /mnt ./chroot
