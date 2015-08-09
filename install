@@ -44,7 +44,7 @@ pacstrap /mnt base base-devel \
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf abs dmenu \
-	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector --noconfirm --ignore linux
+	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector
 
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
