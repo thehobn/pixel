@@ -3,14 +3,8 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-echo "$(tput setaf 6 & tput smso)Installing yaourt . . .$(tput sgr0)"
-mkdir ~/.builds
-cd ~/.builds && wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz && tar -xzf package-query.tar.gz
-cd ~/.builds && wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz && tar -xzf yaourt.tar.gz
-cd ~/.builds/package-query && makepkg -si --noconfirm
-cd ~/.builds/yaourt && makepkg -si --noconfirm
-
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
+mkdir ~/.builds
 sudo mv -v /tmp/mkinitcpio.conf /etc/mkinitcpio.conf
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
