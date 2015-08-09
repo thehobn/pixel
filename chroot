@@ -2,6 +2,9 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
+mv -v /payload/* /tmp
+rmdir /payload
+
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 pacman -R linux --noconfirm
 pacman -Syyu connman wpa_supplicant wireless_tools\
@@ -69,6 +72,6 @@ mv -v /tmp/xdrt /usr/local/bin
 mv -v /tmp/T /usr/local/bin
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
-mv config.h /home/min/
+mv /tmp/config.h /home/min/
 rm chroot
-su min -c ./user
+su min -c ./tmp/user
