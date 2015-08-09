@@ -59,4 +59,4 @@ rankmirrors -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
 
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt/tmp
-arch-chroot /mnt ./tmp/chroot
+arch-chroot /mnt ./chroot
