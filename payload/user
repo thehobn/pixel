@@ -1,45 +1,22 @@
 #!/bin/bash
 
-SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
-SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
-
 echo "$(tput setaf 6 & tput smso)Installing cower and pacaur . . .$(tput sgr0)"
-mkdir ~/.builds
 cd ~/.builds && git clone https://aur.archlinux.org/cower.git && cd cower && makepkg -si --noconfirm
 cd ~/.builds && git clone https://aur.archlinux.org/pacaur.git && cd pacaur && makepkg -si --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
-sudo mv -v /tmp/mkinitcpio.conf /etc/mkinitcpio.conf
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
-sudo mv -v /tmp/grub /etc/default/grub
-sudo mv -v /tmp/40_custom /etc/grub.d/40_custom
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo grub-install --target=i386-pc --recheck --debug $SD
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
 cd ~/.builds && sudo abs community/dwm
 cp -v -r /var/abs/community/dwm ~/.builds/dwm
-sudo chown min:users ~/config.h
 cd ~/.builds/dwm && makepkg -si --noconfirm
-mv -v ~/config.h ~/.builds/dwm/config.h
 cp -v ~/.builds/dwm/config.h ~/.builds/dwm/src/config.h
 cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
-mkdir ~/.builds/st
-sudo mv /tmp/PKGBUILD ~/.builds/st
-sudo chown min:users ~/.builds/st/PKGBUILD
 cd ~/.builds/st && makepkg -si --skipinteg --noconfirm
-
-echo "$(tput setaf 6 & tput smso)Editing xinitrc . . .$(tput sgr0)"
-sudo mv -v /tmp/.xinitrc ~/.xinitrc
-sudo chown min:users ~/.xinitrc
-sudo mv -v /tmp/.xbindkeysrc ~/.xbindkeysrc
-sudo chown min:users ~/.xbindkeysrc
-
-echo "$(tput setaf 6 & tput smso)Setting up X autostart . . .$(tput sgr0)"
-sudo mv -v /tmp/.zlogin ~/.zlogin
-sudo chown min:users ~/.zlogin
-touch ~/.hushlogin
 
 echo "$(tput setaf 6 & tput smso)Setting backup encryption password for /boot . . .$(tput sgr0)"
 sudo cryptsetup luksAddKey $SD-part2 --key-file=/etc/tmp
@@ -56,6 +33,4 @@ echo "$(tput setaf 6 & tput smso)Setting user password. . .$(tput sgr0)"
 sudo passwd min
 
 echo "$(tput setaf 6 & tput smso)Cleaning up . . .$(tput sgr0)"
-sudo mv -v /tmp/finish /home/min/finish
-sudo chown min:users /home/min/finish
-sudo rm /tmp/user
+sudo rm /user

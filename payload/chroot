@@ -1,0 +1,28 @@
+#!/bin/bash
+
+pacman -R linux --noconfirm
+reflector --verbose -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
+
+echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
+echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+ln -v -s /usr/share/zoneinfo/US/Pacific /etc/localtime
+hwclock --systohc --utc
+
+echo "$(tput setaf 6 & tput smso)Setting hostname and adding user . . .$(tput sgr0)"
+echo pixel > /etc/hostname
+useradd -m -g users -G wheel min
+
+echo "$(tput setaf 6 & tput smso)Enable connman . . .$(tput sgr0)"
+systemctl enable connman.service
+
+echo "$(tput setaf 6 & tput smso)Changing shells . . .$(tput sgr0)"
+chsh -s /usr/bin/zsh root
+chsh -s /usr/bin/zsh min
+
+echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
+rm chroot
+chown -R min:users /home/min
+su min -c ./user
