@@ -6,8 +6,6 @@ umount /tmp
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 cp -v /tmp/pacman.conf /mnt/etc
-sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist
-rankmirrors -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
 pacman -R linux --noconfirm
 pacman -Syyu connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
@@ -18,7 +16,7 @@ pacman -Syyu connman wpa_supplicant wireless_tools\
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf abs dmenu \
-	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys --noconfirm
+	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
