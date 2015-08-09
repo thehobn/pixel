@@ -3,8 +3,12 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
+echo "$(tput setaf 6 & tput smso)Installing cower and pacaur . . .$(tput sgr0)"
 mkdir ~/.builds
+cd ~/.builds && git clone https://aur.archlinux.org/cower.git && cd cower && makepkg -si --noconfirm
+cd ~/.builds && git clone https://aur.archlinux.org/pacaur.git && cd pacaur && makepkg -si --noconfirm
+
+echo "$(tput setaf 6 & tput smso)Installing 4.1 samus kernel . . .$(tput sgr0)"
 sudo mv -v /tmp/mkinitcpio.conf /etc/mkinitcpio.conf
 cd ~/.builds && git clone https://github.com/raphael/linux-4.1-samus
 cd ~/.builds/linux-4.1-samus/aur && makepkg -si --noconfirm
