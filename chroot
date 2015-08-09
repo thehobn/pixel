@@ -7,7 +7,7 @@ umount /tmp
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
 mv -v /tmp/pacman.conf /mnt/etc
 pacman -R linux --noconfirm
-pacman -Syyu reflector
+pacman -Syyu reflector --noconfirm
 reflector --verbose -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
 pacman -S connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
