@@ -32,6 +32,9 @@ mkfs.btrfs -L iso -f $SD-part3
 echo "$(tput setaf 6 & tput smso)Installing system. . .$(tput sgr0)"
 mount -v /dev/mapper/sys-root /mnt -o noatime,discard,compress=lzo
 mkdir -v /mnt/boot
+mkdir -v /mnt/etc
+genfstab -U -p /mnt >> /mnt/etc/fstab
+mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 pacstrap /mnt base base-devel \
 	connman wpa_supplicant wireless_tools \
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
@@ -43,9 +46,6 @@ pacstrap /mnt base base-devel \
 	vim \
 	slock surf abs dmenu \
 	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector --noconfirm --ignore linux
-genfstab -U -p /mnt >> /mnt/etc/fstab
-rm /mnt/boot/*
-mount -v /dev/mapper/boot /mnt/boot -o compress=lzo
 
 (
 echo "$(tput setaf 6 & tput smso)Starting live ISO download . . .$(tput sgr0)"
