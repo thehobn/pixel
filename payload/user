@@ -1,4 +1,6 @@
 #!/bin/bash
+SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
+SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
 echo "$(tput setaf 6 & tput smso)Installing cower and pacaur . . .$(tput sgr0)"
 cd ~/.builds && git clone https://aur.archlinux.org/cower.git && cd cower && makepkg -si --noconfirm
@@ -11,8 +13,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo grub-install --target=i386-pc --recheck --debug $SD
 
 echo "$(tput setaf 6 & tput smso)Installing dwm and st. . .$(tput sgr0)"
-cd ~/.builds && sudo abs community/dwm
-cp -v -r /var/abs/community/dwm ~/.builds/dwm
+sudo abs community/dwm
+cp -v -r /var/abs/community/dwm/. ~/.builds/dwm/
 cd ~/.builds/dwm && makepkg -si --noconfirm
 cp -v ~/.builds/dwm/config.h ~/.builds/dwm/src/config.h
 cd ~/.builds/dwm && makepkg -efi --skipinteg --noconfirm
