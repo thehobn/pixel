@@ -52,6 +52,11 @@ cp -v key /mnt/boot
 cp -v key /mnt/crypto_keyfile.bin
 shred -v key -n 8 -z
 
+echo "$(tput setaf 6 & tput smso)Inserting keyfile . . .$(tput sgr0)"
+cp -v pacman.conf /mnt/etc
+sed -i 's/^#Server/Server/' /mnt/etc/pacman.d/mirrorlist
+rankmirrors -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
+
 echo "$(tput setaf 6 & tput smso)Starting next stage . . .$(tput sgr0)"
 cp -v -r payload/. /mnt/tmp
 arch-chroot /mnt ./tmp/chroot
