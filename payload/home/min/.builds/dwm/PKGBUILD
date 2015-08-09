@@ -1,34 +1,36 @@
-# $Id: PKGBUILD 113973 2014-07-01 10:51:04Z spupykin $
-# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
-# Contributor: Dag Odenhall <dag.odenhall@gmail.com>
-# Contributor: Grigorios Bouzakis <grbzks@gmail.com>
-
-pkgname=dwm
-pkgver=6.0
-pkgrel=2
+pkgname=dwm-git
+_pkgname=dwm
+pkgver=6.0.43.g14343e6
+pkgver(){
+  cd $_pkgname
+  git describe --tags |sed 's/-/./g'
+}
+pkgrel=1
 pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
 license=('MIT')
 options=(zipman)
 depends=('libx11' 'libxinerama')
-source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
-	config.h)
+makedepends=('git')
+provides=('dwm')
+conflicts=('dwm')
+epoch=1
+source=("$_pkgname::git+http://git.suckless.org/dwm")
+
+prepare() {
+  if [[ -f $SRCDEST/config.h ]]; then
+    cp $SRCDEST/config.h $srcdir/dwm/config.h
+  fi
+}
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
-  cp $srcdir/config.h config.h
-  sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
-  sed -i 's/^CFLAGS = -g/#CFLAGS += -g/g' config.mk
-  sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
-  sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
-  sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
+  cd $_pkgname
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
-  make PREFIX=/usr DESTDIR=$pkgdir install
-  install -m644 -D LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
-  install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
+  make -C $_pkgname PREFIX=/usr DESTDIR=$pkgdir install
+  install -m644 -D $_pkgname/LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
+  install -m644 -D $_pkgname/README $pkgdir/usr/share/doc/$pkgname/README
 }
