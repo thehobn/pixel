@@ -61,7 +61,6 @@ mv -v /us /usr/share/X11/xkb/symbols
 mv -v /srvr_ctrl /usr/share/X11/xkb/symbols
 mv -v /pc /usr/share/X11/xkb/types
 
-
 echo "$(tput setaf 6 & tput smso)Configuring dmenu bin . . .$(tput sgr0)"
 mv -v /tmp/dmenu_run /usr/local/bin
 echo dmenu_run > /usr/local/bin/.exclude
