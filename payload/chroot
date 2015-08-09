@@ -21,25 +21,25 @@ chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
 
 cd ~/.builds
-sudo -u min git clone https://aur.archlinux.org/cower.git 
-sudo -u min git clone https://aur.archlinux.org/pacaur.git
-sudo -u min git clone https://github.com/raphael/linux-4.1-samus
+sudo -s -u min git clone https://aur.archlinux.org/cower.git 
+sudo -s -u min git clone https://aur.archlinux.org/pacaur.git
+sudo -s -u min git clone https://github.com/raphael/linux-4.1-samus
 
 cd ~/.builds/cower
-sudo -u min makepkg -si --skipinteg --noconfirm
+sudo -s -u min makepkg -si --skipinteg --noconfirm
 cd ~/.builds/pacaur
-sudo -u min makepkg -si --noconfirm
-sudo -u min pacaur -Sa physlock --noconfirm --noedit
+sudo -s -u min makepkg -si --noconfirm
+sudo -s -u min pacaur -Sa physlock --noconfirm --noedit
 
 cd ~/.builds/linux-4.1-samus/aur 
-sudo -u min makepkg -si --noconfirm
+sudo -s -u min makepkg -si --noconfirm
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=i386-pc --recheck $SD
 
 cd ~/.builds/dwm 
-sudo -u min makepkg -si --noconfirm
+sudo -s -u min makepkg -si --noconfirm
 cd ~/.builds/st 
-sudo -u min makepkg -si --noconfirm
+sudo -s -u min makepkg -si --noconfirm
 
 echo Setting boot password
 cryptsetup luksAddKey $SD-part2 --key-file=/etc/tmp
