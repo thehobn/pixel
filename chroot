@@ -5,9 +5,11 @@ SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 umount /tmp
 
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
-cp -v /tmp/pacman.conf /mnt/etc
+mv -v /tmp/pacman.conf /mnt/etc
 pacman -R linux --noconfirm
-pacman -Syyu connman wpa_supplicant wireless_tools\
+pacman -Syyu reflector
+reflector --verbose -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
+pacman -S connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
 	xf86-input-synaptics xf86-video-intel mesa \
 	alsa-utils acpi pulseaudio pulseaudio-alsa\
@@ -16,7 +18,7 @@ pacman -Syyu connman wpa_supplicant wireless_tools\
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf abs dmenu \
-	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector --noconfirm
+	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate --noconfirm
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
