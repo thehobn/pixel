@@ -2,10 +2,10 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-mv -v /payload/* /tmp
-rmdir /payload
-
 echo "$(tput setaf 6 & tput smso)Installing packages . . .$(tput sgr0)"
+cp -v /tmp/pacman.conf /mnt/etc
+sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist
+rankmirrors -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
 pacman -R linux --noconfirm
 pacman -Syyu connman wpa_supplicant wireless_tools\
 	xorg-server xorg-server-utils xorg-xinit xorg-utils xorg-xkbcomp \
