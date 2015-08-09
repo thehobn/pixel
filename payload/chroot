@@ -56,6 +56,12 @@ mv -v /tmp/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
 mv -v /tmp/20-intel.conf /etc/X11/xorg.conf.d/20-intel.conf
 mv -v /tmp/50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
 
+echo "$(tput setaf 6 & tput smso)Configuring keyboard . . .$(tput sgr0)"
+mv -v /us /usr/share/X11/xkb/symbols
+mv -v /srvr_ctrl /usr/share/X11/xkb/symbols
+mv -v /pc /usr/share/X11/xkb/types
+
+
 echo "$(tput setaf 6 & tput smso)Configuring dmenu bin . . .$(tput sgr0)"
 mv -v /tmp/dmenu_run /usr/local/bin
 echo dmenu_run > /usr/local/bin/.exclude
