@@ -1,6 +1,7 @@
 #!/bin/bash
 
 reflector --verbose -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
+pacman -Sy
 
 echo "$(tput setaf 6 & tput smso)Configuring locale and time . . .$(tput sgr0)"
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
