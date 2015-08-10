@@ -1,4 +1,4 @@
-slock &
+(physlock -l && slock && physlock -L) &
 xbindkeys &
 setxkbmap -option caps:none &
 pulseaudio -D &
