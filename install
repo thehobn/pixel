@@ -52,5 +52,5 @@ chmod 000 /mnt/boot/key
 cp key /mnt/crypto_keyfile.bin
 chmod 000 /mnt/crypto_keyfile.bin
 
-rsync -r payload/. /mnt
+rsync -rl payload/. /mnt
 arch-chroot /mnt ./chroot

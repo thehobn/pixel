@@ -20,26 +20,26 @@ systemctl enable connman.service
 chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
 
-cd ~/.builds
-sudo -s -u min git clone https://aur.archlinux.org/cower.git 
-sudo -s -u min git clone https://aur.archlinux.org/pacaur.git
-sudo -s -u min git clone https://github.com/raphael/linux-4.1-samus
+cd /home/min/.builds
+sudo -u min git clone https://aur.archlinux.org/cower.git 
+sudo -u min git clone https://aur.archlinux.org/pacaur.git
+sudo -u min git clone https://github.com/raphael/linux-4.1-samus
 
-cd ~/.builds/cower
-sudo -s -u min makepkg -si --skipinteg --noconfirm
-cd ~/.builds/pacaur
-sudo -s -u min makepkg -si --noconfirm
-sudo -s -u min pacaur -Sa physlock --noconfirm --noedit
+cd /home/min/.builds/cower
+sudo -u min makepkg -si --skipinteg --noconfirm
+cd /home/min/.builds/pacaur
+sudo -u min makepkg -si --noconfirm
+sudo -u min pacaur -Sa physlock --noconfirm --noedit
 
-cd ~/.builds/linux-4.1-samus/aur 
-sudo -s -u min makepkg -si --noconfirm
+cd /home/min/.builds/linux-4.1-samus/aur 
+sudo -u min makepkg -si --noconfirm
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=i386-pc --recheck $SD
 
-cd ~/.builds/dwm 
-sudo -s -u min makepkg -si --noconfirm
-cd ~/.builds/st 
-sudo -s -u min makepkg -si --noconfirm
+cd /home/min/.builds/dwm 
+sudo -u min makepkg -si --noconfirm
+cd /home/min/.builds/st 
+sudo -u min makepkg -si --noconfirm
 
 echo Setting boot password
 cryptsetup luksAddKey $SD-part2 --key-file=/etc/tmp
