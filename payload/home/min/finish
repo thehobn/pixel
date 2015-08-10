@@ -1,5 +1,0 @@
-echo "$(tput setaf 6 & tput smso)Initializing sound . . .$(tput sgr0)"
-cd ~/.builds/linux-4.1-samus/scripts/setup && ./sound.sh
-
-echo "$(tput setaf 6 & tput smso)Self-destructing . . .$(tput sgr0)"
-rm ~/finish

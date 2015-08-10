@@ -54,4 +54,14 @@ passwd root
 echo Setting user password
 passwd min
 
+cp /home/min/.builds/linux-4.1-samus/firmware/* /lib/firmware
+cp /home/min/.builds/linux-4.1-samus/firmware/* /usr/lib/firmware
+ALSA_CONFIG_UCM=/home/min/.builds/linux-4.1-samus/scripts/setup/ucm/ alsaucm -c bdw-rt5677 set _verb HiFi
+sed -i '/^[ 	]*load-module module-alsa-source device=hw:1,2/d' /etc/pulse/default.pa
+sed -i '/load-module module-udev-detect/ i load-module module-alsa-source device=hw:0,2' /etc/pulse/default.pa 
+amixer -c0 set Master "100%"
+amixer -c0 set Speaker toggle
+amixer -c0 set Headphone toggle
+amixer -c0 set Mic "100%"
+
 rm chroot
