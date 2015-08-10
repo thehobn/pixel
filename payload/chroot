@@ -20,6 +20,8 @@ systemctl enable connman.service
 chsh -s /usr/bin/zsh root
 chsh -s /usr/bin/zsh min
 
+chown -R min:users /home/min
+
 cd /home/min/.builds
 sudo -u min git clone https://aur.archlinux.org/cower.git 
 sudo -u min git clone https://aur.archlinux.org/pacaur.git
@@ -52,5 +54,4 @@ passwd root
 echo Setting user password
 passwd min
 
-chown -R min:users /home/min
 rm chroot
