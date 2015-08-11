@@ -693,7 +693,7 @@ state.bdwrt5677 {
 	control.32 {
 		iface MIXER
 		name 'Speaker Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -703,7 +703,7 @@ state.bdwrt5677 {
 	control.33 {
 		iface MIXER
 		name 'Headphone Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
