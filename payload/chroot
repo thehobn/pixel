@@ -7,7 +7,6 @@ pacman -Sy
 
 locale-gen
 export LANG=en_US.UTF-8
-ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
 hwclock --systohc --utc
 
 useradd -g users -G wheel min
