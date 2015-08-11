@@ -1,18 +1,15 @@
 SSD=/dev/disk/by-id/ata-KINGSTON_RBU-SUS151S364GD_50026B7E51D74E12
 SD=/dev/disk/by-id/usb-Generic_Power_Saving_USB_000000000260-0:0
 
-reflector -l 100 --sort rate --save /etc/pacman.d/mirrorlist 
+reflector --country 'United States' -l 100 -p http --sort rate --save /etc/pacman.d/mirrorlist 
 pacman -R linux --noconfirm
 pacman -Sy
 
-echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
 locale-gen
-echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
 ln -s /usr/share/zoneinfo/US/Pacific /etc/localtime
 hwclock --systohc --utc
 
-echo pixel > /etc/hostname
 useradd -g users -G wheel min
 
 systemctl enable connman.service
