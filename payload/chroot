@@ -51,4 +51,4 @@ passwd root
 echo Setting user password
 passwd min
 
-rm chroot
+rm /chroot
