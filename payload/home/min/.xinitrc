@@ -3,6 +3,7 @@ amixer -c0 set Master "100%" &
 pulseaudio -D &
 setxkbmap -option caps:none &
 xbindkeys &
+xbacklight -set 10 &
 xset s off &
 xset -dpms &
 export _JAVA_AWT_WM_NONREPARENTING=1 &
