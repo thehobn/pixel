@@ -1,1 +1,6 @@
 dmenu_path
+adb
+fastboot
+flashrom
+ectool
+dmidecode
