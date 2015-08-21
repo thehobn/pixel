@@ -1,4 +1,4 @@
-(ALSA_CONFIG_UCM=/home/min/.builds/linux-4.1-samus/scripts/setup/ucm/ alsaucm -c bdw-rt5677 set _verb HiFi && amixer -c0 set Speaker off && sed -i '/ALSA*/d' ~/.xinitrc) &
+(ALSA_CONFIG_UCM=/home/min/.builds/linux-4.1-samus/scripts/setup/ucm/ alsaucm -c bdw-rt5677 set _verb HiFi && amixer -c0 set Speaker off && echo 0 | sudo tee /sys/class/leds/chromeos::kbd_backlight/brightness && sed -i '/ALSA*/d' ~/.xinitrc) &
 amixer -c0 set Master "100%" &
 pulseaudio -D &
 xbindkeys &
