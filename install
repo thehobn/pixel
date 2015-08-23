@@ -44,7 +44,8 @@ pacstrap /mnt base base-devel \
 	zsh grml-zsh-config zsh-completions \
 	vim \
 	slock surf dmenu \
-	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector android-tools
+	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector android-tools \
+	mpd ncmpcpp vlc libreoffice gimp audacity
 
 cp tmp /mnt/etc
 cp key /mnt/boot
