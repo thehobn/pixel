@@ -36,7 +36,8 @@ pacstrap /mnt base base-devel \
 	vim \
 	slock surf dmenu \
 	gnupg xsel polkit grub dvtm btrfs-progs xbindkeys mlocate reflector android-tools \
-	mpd ncmpcpp vlc libreoffice gimp audacity
+	mpd ncmpcpp vlc libreoffice gimp audacity \
+	nmap tcpdump net-tools traceroute
 
 cp tmp /mnt/etc
 cp key /mnt/boot
