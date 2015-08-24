@@ -5,8 +5,7 @@ parted -s $SSD mktable gpt
 parted -s $SD mktable gpt \
 	mkpart bios 34s 2047s \
 	set 1 bios_grub on \
-	mkpart boot 2048s 100MiB \
-	mkpart iso 100MiB 1GiB \
+	mkpart boot 2048s 100MiB
 
 dd bs=1024 count=8 if=/dev/random of=key iflag=fullblock
 dd bs=1024 count=8 if=/dev/random of=tmp iflag=fullblock
@@ -21,14 +20,6 @@ lvcreate -l +100%FREE sys -n root
 
 mkfs.btrfs -L root -f /dev/mapper/sys-root
 mkfs.btrfs -L boot -f /dev/mapper/boot
-mkfs.btrfs -L iso -f $SD-part3
-
-(
-wget http://mirrors.ocf.berkeley.edu/archlinux/iso/$(date +%Y).$(date +%m).01/archlinux-$(date +%Y).$(date +%m).01-dual.iso --output-document=/tmp/live.iso > /dev/null 2>&1
-mkdir /tmp/iso
-mount $SD-part3 /tmp/iso
-cp /tmp/live.iso /tmp/iso
-) &
 
 mount /dev/mapper/sys-root /mnt -o noatime,discard,compress=lzo
 genfstab -U -p /mnt >> payload/etc/fstab
